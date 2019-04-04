@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightSpeed", "Src\LightSpee
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{52B34E1D-3B91-49D5-ABC5-272936121151}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{8994A439-1CD6-4769-8FF8-7C825070273F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSpeed.Core", "Src\LightSpeed.Core\LightSpeed.Core.csproj", "{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +21,10 @@ Global
 		{09C3E4D3-63C3-433E-9C3A-092F521F688A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09C3E4D3-63C3-433E-9C3A-092F521F688A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09C3E4D3-63C3-433E-9C3A-092F521F688A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
