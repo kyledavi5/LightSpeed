@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightSpeed", "Src\LightSpeed\LightSpeed.csproj", "{09C3E4D3-63C3-433E-9C3A-092F521F688A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{52B34E1D-3B91-49D5-ABC5-272936121151}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09C3E4D3-63C3-433E-9C3A-092F521F688A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09C3E4D3-63C3-433E-9C3A-092F521F688A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09C3E4D3-63C3-433E-9C3A-092F521F688A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09C3E4D3-63C3-433E-9C3A-092F521F688A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {879C7615-DD5B-4DF3-AAF4-0C783BDF6A69}
+	EndGlobalSection
+EndGlobal
