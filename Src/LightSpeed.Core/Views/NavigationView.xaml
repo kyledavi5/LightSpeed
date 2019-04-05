@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="LightSpeed.Core.Views.NavigationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True" >
+    <StackPanel HorizontalAlignment="Left" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top" Width="150">
+        <TextBlock Text="Main Menu" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="2,5,2,10" />
+        <Button Content="Module A" FontSize="14" Height="40" Width="145" Margin="2,5,2,5"/>
+        <Button Content="Module B" FontSize="14" Height="40" Width="145" Margin="2,5,2,5"/>
+        <Button Content="Module C" FontSize="14" Height="40" Width="145" Margin="2,5,2,5"/>
+    </StackPanel>
+</UserControl>

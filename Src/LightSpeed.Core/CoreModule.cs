@@ -11,6 +11,7 @@ namespace LightSpeed.Core
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion("HeaderRegion", typeof(MenuView));
+            regionManager.RegisterViewWithRegion("LeftRegion", typeof(NavigationView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
