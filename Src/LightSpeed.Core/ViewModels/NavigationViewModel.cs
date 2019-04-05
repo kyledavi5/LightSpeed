@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,22 @@ namespace LightSpeed.Core.ViewModels
 {
     public class NavigationViewModel : BindableBase
     {
-        public NavigationViewModel()
+        IRegionManager _regionManager;
+
+        public DelegateCommand<string> NavigateCommand { get; set; }
+
+        public NavigationViewModel(IRegionManager regionManager)
         {
-            
+            _regionManager = regionManager;
+            NavigateCommand = new DelegateCommand<string>(Navigate);
+        }
+
+        private void Navigate(string navigatePath)
+        {
+            if(navigatePath != null)
+            {
+                _regionManager.RequestNavigate("RightRegion", navigatePath);
+            }
         }
     }
 }

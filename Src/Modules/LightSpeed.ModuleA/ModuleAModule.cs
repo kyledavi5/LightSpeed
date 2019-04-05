@@ -9,12 +9,13 @@ namespace LightSpeed.ModuleA
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-
+            var regionManager = containerProvider.Resolve<IRegionManager>();
+            regionManager.RegisterViewWithRegion("RightRegion", typeof(MasterView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            
+            containerRegistry.RegisterForNavigation<MasterView>();
         }
     }
 }

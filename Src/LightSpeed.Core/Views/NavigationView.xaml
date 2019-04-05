@@ -9,7 +9,7 @@
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <StackPanel HorizontalAlignment="Left" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top" Width="150">
         <TextBlock Text="Main Menu" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="2,5,2,10" />
-        <Button Content="Module A" FontSize="14" Height="40" Width="145" Margin="2,5,2,5"/>
+        <Button Content="Module A" Command="{Binding NavigateCommand}" CommandParameter="MasterView" FontSize="14" Height="40" Width="145" Margin="2,5,2,5"/>
         <Button Content="Module B" FontSize="14" Height="40" Width="145" Margin="2,5,2,5"/>
         <Button Content="Module C" FontSize="14" Height="40" Width="145" Margin="2,5,2,5"/>
     </StackPanel>
