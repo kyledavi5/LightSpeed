@@ -1,5 +1,4 @@
-﻿using LightSpeed.ModuleA.Models;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -11,21 +10,20 @@ using System.Threading.Tasks;
 
 namespace LightSpeed.ModuleA.ViewModels
 {
-    public class MasterViewViewModel : BindableBase, INavigationAware
+    public class MasterViewModel : BindableBase, INavigationAware
     {
-        private ObservableCollection<Gizmo> _moduleAItems;
-        public ObservableCollection<Gizmo> ModuleAItems
+
+        private ObservableCollection<object> _moduleAItems;
+        public ObservableCollection<object> ModuleAItems
         {
             get { return _moduleAItems; }
             set { SetProperty(ref _moduleAItems, value); }
         }
 
-        public MasterViewViewModel()
+        public MasterViewModel()
         {
-            ModuleAItems = new ObservableCollection<Gizmo>();
-            ModuleAItems.Add(new Gizmo() { Name = "test" });
-            ModuleAItems.Add(new Gizmo() { Name = "test" });
-            ModuleAItems.Add(new Gizmo() { Name = "test" });
+            ModuleAItems = new ObservableCollection<object>();
+            
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
