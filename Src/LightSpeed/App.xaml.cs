@@ -23,6 +23,7 @@ namespace LightSpeed
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<Core.CoreModule>();
+            moduleCatalog.AddModule<ModuleA.ModuleAModule>();
         }
     }
 }

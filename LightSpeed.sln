@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{8994
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightSpeed.Core", "Src\LightSpeed.Core\LightSpeed.Core.csproj", "{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSpeed.ModuleA", "Src\Modules\LightSpeed.ModuleA\LightSpeed.ModuleA.csproj", "{DE9F632E-18FE-47FA-AE63-8E0C37A10B52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,9 +27,16 @@ Global
 		{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE9F632E-18FE-47FA-AE63-8E0C37A10B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE9F632E-18FE-47FA-AE63-8E0C37A10B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE9F632E-18FE-47FA-AE63-8E0C37A10B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE9F632E-18FE-47FA-AE63-8E0C37A10B52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DE9F632E-18FE-47FA-AE63-8E0C37A10B52} = {8994A439-1CD6-4769-8FF8-7C825070273F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {879C7615-DD5B-4DF3-AAF4-0C783BDF6A69}

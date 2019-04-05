@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LightSpeed.Core.ViewModels
+namespace LightSpeed.ModuleA.ViewModels
 {
-    public class NavigationViewModel : BindableBase
+    public class MasterViewViewModel : BindableBase
     {
-        public NavigationViewModel()
+        public MasterViewViewModel()
         {
-            
+           
         }
     }
 }

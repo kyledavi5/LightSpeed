@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace LightSpeed.Core.Views
 {
     /// <summary>
-    /// Interaction logic for ViewA.xaml
+    /// Interaction logic for MenuView.xaml
     /// </summary>
     public partial class MenuView : UserControl
     {
