@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{52B34E1D-3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{8994A439-1CD6-4769-8FF8-7C825070273F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSpeed.Core", "Src\LightSpeed.Core\LightSpeed.Core.csproj", "{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightSpeed.Core", "Src\LightSpeed.Core\LightSpeed.Core.csproj", "{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

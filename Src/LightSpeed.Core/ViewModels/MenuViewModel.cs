@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LightSpeed.Core.ViewModels
 {
-    public class ViewAViewModel : BindableBase
+    public class MenuViewModel : BindableBase
     {
         private string _message;
         public string Message
@@ -17,9 +17,9 @@ namespace LightSpeed.Core.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
-        public ViewAViewModel()
+        public MenuViewModel()
         {
-            Message = "View A from your Prism Module";
+            
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Prism.Ioc;
 using LightSpeed.Views;
 using System.Windows;
+using Prism.Modularity;
 
 namespace LightSpeed
 {
@@ -16,7 +17,12 @@ namespace LightSpeed
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         { 
+            
+        }
 
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            moduleCatalog.AddModule<Core.CoreModule>();
         }
     }
 }
