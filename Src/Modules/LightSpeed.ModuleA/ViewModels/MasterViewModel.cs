@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,8 @@ namespace LightSpeed.ModuleA.ViewModels
     public class MasterViewModel : BindableBase, INavigationAware
     {
 
+        private IDialogService _dialogService;
+
         private ObservableCollection<object> _moduleAItems;
         public ObservableCollection<object> ModuleAItems
         {
@@ -20,10 +23,40 @@ namespace LightSpeed.ModuleA.ViewModels
             set { SetProperty(ref _moduleAItems, value); }
         }
 
-        public MasterViewModel()
+        public DelegateCommand ShowDialogCommand { get; private set; }
+
+        public MasterViewModel(IDialogService dialogService)
         {
+            _dialogService = dialogService;
             ModuleAItems = new ObservableCollection<object>();
+            ShowDialogCommand = new DelegateCommand(ShowNotificationDialog);
             
+        }
+
+        private void ShowNotificationDialog()
+        {
+
+            var message = "Not Implemented Yet";
+
+            _dialogService.ShowDialog("NotificationDialog", new DialogParameters($"message={message}"), r =>
+
+            {
+                if (r.Result.HasValue)
+                {
+                    if (r.Result == true)
+                    {
+
+                    }
+                    else if (r.Result == false)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+            });
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
