@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{8994
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightSpeed.Core", "Src\LightSpeed.Core\LightSpeed.Core.csproj", "{AAF9D0D7-7BB4-475E-A4A1-E441E050A5D5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightSpeed.ModuleA", "Src\Modules\LightSpeed.ModuleA\LightSpeed.ModuleA.csproj", "{DE9F632E-18FE-47FA-AE63-8E0C37A10B52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightSpeed.Customers", "Src\Modules\LightSpeed.ModuleA\LightSpeed.Customers.csproj", "{DE9F632E-18FE-47FA-AE63-8E0C37A10B52}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSpeed.Common", "Src\LightSpeed.Common\LightSpeed.Common.csproj", "{80773020-239C-46CF-9C10-FB2434FB70B8}"
 EndProject

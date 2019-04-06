@@ -9,26 +9,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LightSpeed.ModuleA.ViewModels
+namespace LightSpeed.Customers.ViewModels
 {
-    public class MasterViewModel : BindableBase, INavigationAware
+    public class CustomersMasterViewModel : BindableBase, INavigationAware
     {
 
         private IDialogService _dialogService;
 
-        private ObservableCollection<object> _moduleAItems;
-        public ObservableCollection<object> ModuleAItems
+        private ObservableCollection<object> _CustomersItems;
+        public ObservableCollection<object> CustomersItems
         {
-            get { return _moduleAItems; }
-            set { SetProperty(ref _moduleAItems, value); }
+            get { return _CustomersItems; }
+            set { SetProperty(ref _CustomersItems, value); }
         }
 
         public DelegateCommand ShowDialogCommand { get; private set; }
 
-        public MasterViewModel(IDialogService dialogService)
+        public CustomersMasterViewModel(IDialogService dialogService)
         {
             _dialogService = dialogService;
-            ModuleAItems = new ObservableCollection<object>();
+            CustomersItems = new ObservableCollection<object>();
             ShowDialogCommand = new DelegateCommand(ShowNotificationDialog);
             
         }

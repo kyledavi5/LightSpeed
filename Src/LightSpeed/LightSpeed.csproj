@@ -10,6 +10,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LightSpeed.Core\LightSpeed.Core.csproj" />
-    <ProjectReference Include="..\Modules\LightSpeed.ModuleA\LightSpeed.ModuleA.csproj" />
+    <ProjectReference Include="..\Modules\LightSpeed.ModuleA\LightSpeed.Customers.csproj" />
   </ItemGroup>
 </Project>

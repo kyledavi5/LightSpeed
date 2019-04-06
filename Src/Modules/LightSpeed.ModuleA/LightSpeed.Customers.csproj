@@ -2,10 +2,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyName>LightSpeed.ModuleA</AssemblyName>
+    <AssemblyName>LightSpeed.Customers</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Views\MasterView.xaml" />
+    <None Remove="Views\CustomersMasterView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1156-ci" />

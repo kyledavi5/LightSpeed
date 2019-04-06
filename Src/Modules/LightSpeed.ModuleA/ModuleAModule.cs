@@ -1,22 +1,22 @@
 ﻿using LightSpeed.Common.Dialogs;
-using LightSpeed.ModuleA.Views;
+using LightSpeed.Customers.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
-namespace LightSpeed.ModuleA
+namespace LightSpeed.Customers
 {
-    public class ModuleAModule : IModule
+    public class CustomersModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.RegisterViewWithRegion("RightRegion", typeof(MasterView));
+            regionManager.RegisterViewWithRegion("RightRegion", typeof(CustomersMasterView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<MasterView>();
+            containerRegistry.RegisterForNavigation<CustomersMasterView>();
             containerRegistry.RegisterDialog<NotificationDialog, NotificationDialogViewModel>();
         }
     }
