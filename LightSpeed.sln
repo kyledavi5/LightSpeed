@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightSpeed.Customers", "Src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSpeed.Common", "Src\LightSpeed.Common\LightSpeed.Common.csproj", "{80773020-239C-46CF-9C10-FB2434FB70B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSpeed.Data", "Src\LightSpeed.Data\LightSpeed.Data.csproj", "{528EF2E3-8632-4B10-8A5B-1CAE02E56ADB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{80773020-239C-46CF-9C10-FB2434FB70B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80773020-239C-46CF-9C10-FB2434FB70B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80773020-239C-46CF-9C10-FB2434FB70B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{528EF2E3-8632-4B10-8A5B-1CAE02E56ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{528EF2E3-8632-4B10-8A5B-1CAE02E56ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{528EF2E3-8632-4B10-8A5B-1CAE02E56ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{528EF2E3-8632-4B10-8A5B-1CAE02E56ADB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
