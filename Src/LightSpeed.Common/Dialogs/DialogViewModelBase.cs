@@ -25,11 +25,20 @@ namespace LightSpeed.Common.Dialogs
             bool? result = null;
 
             if (parameter?.ToLower() == "true")
+            {
                 result = true;
+            }
             else if (parameter?.ToLower() == "false")
+            {
                 result = false;
+            }
+                
+            RaiseRequestClose(new DialogResult(result));
+        }
 
-            RequestClose?.Invoke(new DialogResult(result));
+        public virtual void RaiseRequestClose(IDialogResult dialogResult)
+        {
+            RequestClose?.Invoke(dialogResult);
         }
 
         public virtual bool CanCloseDialog()

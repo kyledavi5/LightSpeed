@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using LightSpeed.Data.Models;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
@@ -30,17 +31,15 @@ namespace LightSpeed.Customers.ViewModels
             _dialogService = dialogService;
             CustomersItems = new ObservableCollection<object>();
             ShowDialogCommand = new DelegateCommand(ShowNotificationDialog);
-            
         }
 
         private void ShowNotificationDialog()
         {
-
-            var message = "Not Implemented Yet";
-
-            _dialogService.ShowDialog("NotificationDialog", new DialogParameters($"message={message}"), r =>
-
+            _dialogService.ShowDialog("AddNewCustomerDialog",null, r =>
             {
+                CustomersItems.Add(new Customer() { FirstName = r.Parameters.GetValue<string>("CustomerFirstName"),
+                                                    LastName = r.Parameters.GetValue<string>("CustomerLastName")});
+
                 if (r.Result.HasValue)
                 {
                     if (r.Result == true)
@@ -55,6 +54,7 @@ namespace LightSpeed.Customers.ViewModels
                     {
 
                     }
+
                 }
             });
         }

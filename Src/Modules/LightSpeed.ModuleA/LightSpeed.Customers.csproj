@@ -5,15 +5,19 @@
     <AssemblyName>LightSpeed.Customers</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Dialogs\AddNewCustomerDialog.xaml" />
     <None Remove="Views\CustomersMasterView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1156-ci" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dialogs\" />
+    <ProjectReference Include="..\..\LightSpeed.Common\LightSpeed.Common.csproj" />
+    <ProjectReference Include="..\..\LightSpeed.Data\LightSpeed.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\LightSpeed.Common\LightSpeed.Common.csproj" />
+    <Compile Update="Dialogs\AddNewCustomerDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
