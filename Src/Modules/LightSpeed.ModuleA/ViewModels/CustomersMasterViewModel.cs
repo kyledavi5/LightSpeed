@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LightSpeed.Data;
 
 namespace LightSpeed.Customers.ViewModels
 {
@@ -31,19 +32,31 @@ namespace LightSpeed.Customers.ViewModels
             _dialogService = dialogService;
             CustomersItems = new ObservableCollection<object>();
             ShowDialogCommand = new DelegateCommand(ShowNotificationDialog);
+
         }
 
         private void ShowNotificationDialog()
         {
             _dialogService.ShowDialog("AddNewCustomerDialog",null, r =>
             {
-                CustomersItems.Add(new Customer() { FirstName = r.Parameters.GetValue<string>("CustomerFirstName"),
-                                                    LastName = r.Parameters.GetValue<string>("CustomerLastName")});
-
                 if (r.Result.HasValue)
                 {
                     if (r.Result == true)
                     {
+
+                        using (var context = new LightSpeedDataContext())
+                        {
+                            var customer = new Customer();
+                            customer.FirstName = r.Parameters.GetValue<string>("CustomerFirstName");
+                            customer.LastName = r.Parameters.GetValue<string>("CustomerLastName");
+
+                            context.Customers.Add(customer);
+                            CustomersItems.Add(customer);
+                        }
+
+                        
+
+
 
                     }
                     else if (r.Result == false)
