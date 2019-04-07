@@ -3,6 +3,7 @@ using LightSpeed.Views;
 using System.Windows;
 using Prism.Modularity;
 
+
 namespace LightSpeed
 {
     /// <summary>

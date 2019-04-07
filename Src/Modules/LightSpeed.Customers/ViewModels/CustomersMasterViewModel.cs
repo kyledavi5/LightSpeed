@@ -15,11 +15,10 @@ namespace LightSpeed.Customers.ViewModels
 {
     public class CustomersMasterViewModel : BindableBase, INavigationAware
     {
-
         private IDialogService _dialogService;
 
-        private ObservableCollection<object> _CustomersItems;
-        public ObservableCollection<object> CustomersItems
+        private ObservableCollection<Customer> _CustomersItems;
+        public ObservableCollection<Customer> CustomersItems
         {
             get { return _CustomersItems; }
             set { SetProperty(ref _CustomersItems, value); }
@@ -30,45 +29,32 @@ namespace LightSpeed.Customers.ViewModels
         public CustomersMasterViewModel(IDialogService dialogService)
         {
             _dialogService = dialogService;
-            CustomersItems = new ObservableCollection<object>();
+            LoadTableData();
+            //CustomersItems = new ObservableCollection<object>();
             ShowDialogCommand = new DelegateCommand(ShowNotificationDialog);
+        }
 
+        private void LoadTableData()
+        {
+            using (var context = new LightSpeedDataContext())
+            {
+                CustomersItems = new ObservableCollection<Customer>(context.Customers.ToList());
+            }   
         }
 
         private void ShowNotificationDialog()
         {
             _dialogService.ShowDialog("AddNewCustomerDialog",null, r =>
             {
-                if (r.Result.HasValue)
+                using (var context = new LightSpeedDataContext())
                 {
-                    if (r.Result == true)
-                    {
-
-                        using (var context = new LightSpeedDataContext())
-                        {
-                            var customer = new Customer();
-                            customer.FirstName = r.Parameters.GetValue<string>("CustomerFirstName");
-                            customer.LastName = r.Parameters.GetValue<string>("CustomerLastName");
-
-                            context.Customers.Add(customer);
-                            CustomersItems.Add(customer);
-                        }
-
-                        
-
-
-
-                    }
-                    else if (r.Result == false)
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
-
+                    var customer = new Customer();
+                    customer.FirstName = r.Parameters.GetValue<string>("CustomerFirstName");
+                    customer.LastName = r.Parameters.GetValue<string>("CustomerLastName");
+                    context.Customers.Add(customer);
+                    context.SaveChanges();
                 }
+                LoadTableData();     
             });
         }
 
