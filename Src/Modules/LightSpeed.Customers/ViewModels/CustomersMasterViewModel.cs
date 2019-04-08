@@ -74,20 +74,12 @@ namespace LightSpeed.Customers.ViewModels
                     {
                         using (var context = new LightSpeedDataContext())
                         {
-                            var customer = context.Customers.Find(r.Parameters.GetValue<int>("CustomerId"));
+                            var customer = context.Customers.Find(r.Parameters.GetValue<int>("CustomerID"));
                             customer.FirstName = r.Parameters.GetValue<string>("CustomerFirstName");
                             customer.LastName = r.Parameters.GetValue<string>("CustomerLastName");
                             context.SaveChanges();
                         }
                         LoadTableData();
-                    }
-                    else if (r.Result == false)
-                    {
-                        LoadTableData();
-                    }
-                    else
-                    {
-                        // unknown
                     }
                 }
                 LoadTableData();

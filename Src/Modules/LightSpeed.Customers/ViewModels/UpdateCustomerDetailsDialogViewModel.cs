@@ -39,24 +39,22 @@ namespace LightSpeed.Customers.Dialogs
             }
         }
 
-        protected override void CloseDialog(string parameter)
+        protected override void CloseDialog(string boolParam)
         {
-            bool? result = null;
 
-            if (parameter?.ToLower() == "true")
+            bool buttonResult = false;
+
+            if (boolParam.ToLower() == "true")
             {
-                result = true;
-            }
-            else if (parameter?.ToLower() == "false")
-            {
-                result = false;
+                buttonResult = true;
             }
 
-            var dialogResult = new DialogResult();
+            var dialogResult = new DialogResult(buttonResult);
 
             dialogResult.Parameters.Add("CustomerID", Id);
             dialogResult.Parameters.Add("CustomerFirstName", CustomerFirstName);
             dialogResult.Parameters.Add("CustomerLastName", CustomerLastName);
+
             RaiseRequestClose(dialogResult);
         }
 
