@@ -4,7 +4,7 @@ using Prism.Services.Dialogs;
 
 namespace LightSpeed.Customers.Dialogs
 {
-    public class ViewCustomerDetailsDialogViewModel : DialogViewModelBase
+    public class UpdateCustomerDetailsDialogViewModel : DialogViewModelBase
     {
 
         protected int Id { get; set; }
@@ -23,10 +23,9 @@ namespace LightSpeed.Customers.Dialogs
             set { SetProperty(ref _customerLastName, value); }
         }
 
-        public ViewCustomerDetailsDialogViewModel()
+        public UpdateCustomerDetailsDialogViewModel()
         {
-            CustomerFirstName = "Default";
-            CustomerLastName = "Value";
+            
         }
 
         private void LoadRecordData(int id)
@@ -40,12 +39,25 @@ namespace LightSpeed.Customers.Dialogs
             }
         }
 
-
-
         protected override void CloseDialog(string parameter)
         {
-            var result = new DialogResult();
-            RaiseRequestClose(result);
+            bool? result = null;
+
+            if (parameter?.ToLower() == "true")
+            {
+                result = true;
+            }
+            else if (parameter?.ToLower() == "false")
+            {
+                result = false;
+            }
+
+            var dialogResult = new DialogResult();
+
+            dialogResult.Parameters.Add("CustomerID", Id);
+            dialogResult.Parameters.Add("CustomerFirstName", CustomerFirstName);
+            dialogResult.Parameters.Add("CustomerLastName", CustomerLastName);
+            RaiseRequestClose(dialogResult);
         }
 
         public override void OnDialogOpened(IDialogParameters parameters)

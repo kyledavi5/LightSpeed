@@ -66,7 +66,32 @@ namespace LightSpeed.Customers.ViewModels
             var customerId = SelectedItem.Id;
 
             //todo add parameters that have the selected datagrid item in it so that the dialog's view model can query the database with an id of the selected object
-            _dialogService.ShowDialog("ViewCustomerDetailsDialog", new DialogParameters($"CustomerID={customerId}"), r => { });
+            _dialogService.ShowDialog("UpdateCustomerDetailsDialog", new DialogParameters($"CustomerID={customerId}"), r => 
+            {
+                if (r.Result.HasValue)
+                {
+                    if (r.Result == true)
+                    {
+                        using (var context = new LightSpeedDataContext())
+                        {
+                            var customer = context.Customers.Find(r.Parameters.GetValue<int>("CustomerId"));
+                            customer.FirstName = r.Parameters.GetValue<string>("CustomerFirstName");
+                            customer.LastName = r.Parameters.GetValue<string>("CustomerLastName");
+                            context.SaveChanges();
+                        }
+                        LoadTableData();
+                    }
+                    else if (r.Result == false)
+                    {
+                        LoadTableData();
+                    }
+                    else
+                    {
+                        // unknown
+                    }
+                }
+                LoadTableData();
+            });
         }
         public CustomersMasterViewModel(IDialogService dialogService)
         {
