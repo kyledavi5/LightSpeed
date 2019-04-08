@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LightSpeed.Data;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace LightSpeed.Customers.ViewModels
 {
@@ -17,32 +19,33 @@ namespace LightSpeed.Customers.ViewModels
     {
         private IDialogService _dialogService;
 
-        private ObservableCollection<Customer> _CustomersItems;
-        public ObservableCollection<Customer> CustomersItems
+        //public ICollectionView Something { get; set; }
+
+        private Customer _selectedItem;
+        public Customer SelectedItem
         {
-            get { return _CustomersItems; }
-            set { SetProperty(ref _CustomersItems, value); }
+            get { return _selectedItem; }
+            set { SetProperty(ref _selectedItem, value); }
         }
 
-        public DelegateCommand ShowDialogCommand { get; private set; }
-
-        public CustomersMasterViewModel(IDialogService dialogService)
+        private ObservableCollection<Customer> _customerCollection;
+        public ObservableCollection<Customer> CustomerCollection
         {
-            _dialogService = dialogService;
-            LoadTableData();
-            //CustomersItems = new ObservableCollection<object>();
-            ShowDialogCommand = new DelegateCommand(ShowNotificationDialog);
+            get { return _customerCollection; }
+            set { SetProperty(ref _customerCollection, value); }
         }
 
-        private void LoadTableData()
-        {
-            using (var context = new LightSpeedDataContext())
-            {
-                CustomersItems = new ObservableCollection<Customer>(context.Customers.ToList());
-            }   
-        }
+        private DelegateCommand _openViewCustomerDetailsDialogCommand;
+        public DelegateCommand OpenViewCustomerDetailsDialogCommand =>
+            _openViewCustomerDetailsDialogCommand ?? (_openViewCustomerDetailsDialogCommand = new DelegateCommand(OpenCustomerDetailsDialog));
 
-        private void ShowNotificationDialog()
+        
+
+        private DelegateCommand _openNewCustomerDialogCommand;
+        public DelegateCommand OpenNewCustomerDialogCommand =>
+            _openNewCustomerDialogCommand ?? (_openNewCustomerDialogCommand = new DelegateCommand(OpenNewCustomerDialog));
+
+        void OpenNewCustomerDialog()
         {
             _dialogService.ShowDialog("AddNewCustomerDialog",null, r =>
             {
@@ -56,6 +59,29 @@ namespace LightSpeed.Customers.ViewModels
                 }
                 LoadTableData();     
             });
+        }
+
+        void OpenCustomerDetailsDialog()
+        {
+            var customerId = SelectedItem.Id;
+
+            //todo add parameters that have the selected datagrid item in it so that the dialog's view model can query the database with an id of the selected object
+            _dialogService.ShowDialog("ViewCustomerDetailsDialog", new DialogParameters($"CustomerID={customerId}"), r => { });
+        }
+        public CustomersMasterViewModel(IDialogService dialogService)
+        {
+            _dialogService = dialogService;
+            LoadTableData();
+        }
+
+        private void LoadTableData()
+        {
+            using (var context = new LightSpeedDataContext())
+            {
+                
+                CustomerCollection = new ObservableCollection<Customer>(context.Customers.ToList());
+                //Something = CollectionViewSource.GetDefaultView(CustomersItems);
+            }   
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
