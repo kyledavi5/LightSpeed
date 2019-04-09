@@ -23,6 +23,41 @@ namespace LightSpeed.Customers.Dialogs
             set { SetProperty(ref _customerLastName, value); }
         }
 
+        private string _customerEmail;
+        public string CustomerEmail
+        {
+            get { return _customerEmail; }
+            set { SetProperty(ref _customerEmail, value); }
+        }
+
+        private string _customerAddress;
+        public string CustomerAddress
+        {
+            get { return _customerAddress; }
+            set { SetProperty(ref _customerAddress, value); }
+        }
+
+        private string _customerCity;
+        public string CustomerCity
+        {
+            get { return _customerCity; }
+            set { SetProperty(ref _customerCity, value); }
+        }
+
+        private string _customerState;
+        public string CustomerState
+        {
+            get { return _customerState; }
+            set { SetProperty(ref _customerState, value); }
+        }
+
+        private string _customerZipCode;
+        public string CustomerZipCode
+        {
+            get { return _customerZipCode; }
+            set { SetProperty(ref _customerZipCode, value); }
+        }
+
         public UpdateCustomerDetailsDialogViewModel()
         {
             
@@ -36,6 +71,11 @@ namespace LightSpeed.Customers.Dialogs
 
                 CustomerFirstName = customer.FirstName;
                 CustomerLastName = customer.LastName;
+                CustomerEmail = customer.Email;
+                CustomerAddress = customer.Address;
+                CustomerCity = customer.City;
+                CustomerState = customer.State;
+                CustomerZipCode = customer.ZipCode;
             }
         }
 
@@ -54,6 +94,11 @@ namespace LightSpeed.Customers.Dialogs
             dialogResult.Parameters.Add("CustomerID", Id);
             dialogResult.Parameters.Add("CustomerFirstName", CustomerFirstName);
             dialogResult.Parameters.Add("CustomerLastName", CustomerLastName);
+            dialogResult.Parameters.Add("CustomerEmail", CustomerEmail);
+            dialogResult.Parameters.Add("CustomerAddress", CustomerAddress);
+            dialogResult.Parameters.Add("CustomerCity", CustomerCity);
+            dialogResult.Parameters.Add("CustomerState", CustomerState);
+            dialogResult.Parameters.Add("CustomerZipCode", CustomerZipCode);
 
             RaiseRequestClose(dialogResult);
         }

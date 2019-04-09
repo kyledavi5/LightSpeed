@@ -54,6 +54,12 @@ namespace LightSpeed.Customers.ViewModels
                     var customer = new Customer();
                     customer.FirstName = r.Parameters.GetValue<string>("CustomerFirstName");
                     customer.LastName = r.Parameters.GetValue<string>("CustomerLastName");
+                    customer.Email = r.Parameters.GetValue<string>("CustomerEmail");
+                    customer.Address = r.Parameters.GetValue<string>("CustomerAddress");
+                    customer.City = r.Parameters.GetValue<string>("CustomerCity");
+                    customer.State = r.Parameters.GetValue<string>("CustomerState");
+                    customer.ZipCode = r.Parameters.GetValue<string>("CustomerZipCode");
+
                     context.Customers.Add(customer);
                     context.SaveChanges();
                 }
@@ -77,6 +83,11 @@ namespace LightSpeed.Customers.ViewModels
                             var customer = context.Customers.Find(r.Parameters.GetValue<int>("CustomerID"));
                             customer.FirstName = r.Parameters.GetValue<string>("CustomerFirstName");
                             customer.LastName = r.Parameters.GetValue<string>("CustomerLastName");
+                            customer.Email = r.Parameters.GetValue<string>("CustomerEmail");
+                            customer.Address = r.Parameters.GetValue<string>("CustomerAddress");
+                            customer.City = r.Parameters.GetValue<string>("CustomerCity");
+                            customer.State = r.Parameters.GetValue<string>("CustomerState");
+                            customer.ZipCode = r.Parameters.GetValue<string>("CustomerZipCode");
                             context.SaveChanges();
                         }
                         LoadTableData();

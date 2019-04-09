@@ -3,14 +3,16 @@ using LightSpeed.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LightSpeed.Data.Migrations
 {
     [DbContext(typeof(LightSpeedDataContext))]
-    partial class LightSpeedDataContextModelSnapshot : ModelSnapshot
+    [Migration("20190409012403_additionalCustomerInfo2")]
+    partial class additionalCustomerInfo2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
