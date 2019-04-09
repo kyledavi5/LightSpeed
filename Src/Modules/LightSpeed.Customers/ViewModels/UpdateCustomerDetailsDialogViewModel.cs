@@ -87,20 +87,37 @@ namespace LightSpeed.Customers.Dialogs
             if (boolParam.ToLower() == "true")
             {
                 buttonResult = true;
+                SaveToDatabase();
             }
 
             var dialogResult = new DialogResult(buttonResult);
 
-            dialogResult.Parameters.Add("CustomerID", Id);
-            dialogResult.Parameters.Add("CustomerFirstName", CustomerFirstName);
-            dialogResult.Parameters.Add("CustomerLastName", CustomerLastName);
-            dialogResult.Parameters.Add("CustomerEmail", CustomerEmail);
-            dialogResult.Parameters.Add("CustomerAddress", CustomerAddress);
-            dialogResult.Parameters.Add("CustomerCity", CustomerCity);
-            dialogResult.Parameters.Add("CustomerState", CustomerState);
-            dialogResult.Parameters.Add("CustomerZipCode", CustomerZipCode);
+            
 
             RaiseRequestClose(dialogResult);
+        }
+
+        private void ValidateData()
+        {
+
+        }
+
+        private void SaveToDatabase()
+        {
+            using (var context = new LightSpeedDataContext())
+            {
+                var customer = context.Customers.Find(Id);
+
+                customer.FirstName = CustomerFirstName;
+                customer.LastName = CustomerLastName;
+                customer.Email = CustomerEmail;
+                customer.Address = CustomerAddress;
+                customer.City = CustomerCity;
+                customer.State = CustomerState;
+                customer.ZipCode = CustomerZipCode;
+
+                context.SaveChanges();
+            }
         }
 
         public override void OnDialogOpened(IDialogParameters parameters)

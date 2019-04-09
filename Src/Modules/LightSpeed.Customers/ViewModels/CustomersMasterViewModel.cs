@@ -15,11 +15,9 @@ using System.Windows.Data;
 
 namespace LightSpeed.Customers.ViewModels
 {
-    public class CustomersMasterViewModel : BindableBase, INavigationAware
+    public class CustomersMasterViewModel : BindableBase
     {
         private IDialogService _dialogService;
-
-        //public ICollectionView Something { get; set; }
 
         private Customer _selectedItem;
         public Customer SelectedItem
@@ -39,8 +37,6 @@ namespace LightSpeed.Customers.ViewModels
         public DelegateCommand OpenViewCustomerDetailsDialogCommand =>
             _openViewCustomerDetailsDialogCommand ?? (_openViewCustomerDetailsDialogCommand = new DelegateCommand(OpenCustomerDetailsDialog));
 
-        
-
         private DelegateCommand _openNewCustomerDialogCommand;
         public DelegateCommand OpenNewCustomerDialogCommand =>
             _openNewCustomerDialogCommand ?? (_openNewCustomerDialogCommand = new DelegateCommand(OpenNewCustomerDialog));
@@ -49,20 +45,6 @@ namespace LightSpeed.Customers.ViewModels
         {
             _dialogService.ShowDialog("AddNewCustomerDialog",null, r =>
             {
-                using (var context = new LightSpeedDataContext())
-                {
-                    var customer = new Customer();
-                    customer.FirstName = r.Parameters.GetValue<string>("CustomerFirstName");
-                    customer.LastName = r.Parameters.GetValue<string>("CustomerLastName");
-                    customer.Email = r.Parameters.GetValue<string>("CustomerEmail");
-                    customer.Address = r.Parameters.GetValue<string>("CustomerAddress");
-                    customer.City = r.Parameters.GetValue<string>("CustomerCity");
-                    customer.State = r.Parameters.GetValue<string>("CustomerState");
-                    customer.ZipCode = r.Parameters.GetValue<string>("CustomerZipCode");
-
-                    context.Customers.Add(customer);
-                    context.SaveChanges();
-                }
                 LoadTableData();     
             });
         }
@@ -71,28 +53,8 @@ namespace LightSpeed.Customers.ViewModels
         {
             var customerId = SelectedItem.Id;
 
-            //todo add parameters that have the selected datagrid item in it so that the dialog's view model can query the database with an id of the selected object
             _dialogService.ShowDialog("UpdateCustomerDetailsDialog", new DialogParameters($"CustomerID={customerId}"), r => 
             {
-                if (r.Result.HasValue)
-                {
-                    if (r.Result == true)
-                    {
-                        using (var context = new LightSpeedDataContext())
-                        {
-                            var customer = context.Customers.Find(r.Parameters.GetValue<int>("CustomerID"));
-                            customer.FirstName = r.Parameters.GetValue<string>("CustomerFirstName");
-                            customer.LastName = r.Parameters.GetValue<string>("CustomerLastName");
-                            customer.Email = r.Parameters.GetValue<string>("CustomerEmail");
-                            customer.Address = r.Parameters.GetValue<string>("CustomerAddress");
-                            customer.City = r.Parameters.GetValue<string>("CustomerCity");
-                            customer.State = r.Parameters.GetValue<string>("CustomerState");
-                            customer.ZipCode = r.Parameters.GetValue<string>("CustomerZipCode");
-                            context.SaveChanges();
-                        }
-                        LoadTableData();
-                    }
-                }
                 LoadTableData();
             });
         }
@@ -108,23 +70,7 @@ namespace LightSpeed.Customers.ViewModels
             {
                 
                 CustomerCollection = new ObservableCollection<Customer>(context.Customers.ToList());
-                //Something = CollectionViewSource.GetDefaultView(CustomersItems);
             }   
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-            
-        }
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            
         }
     }
 }

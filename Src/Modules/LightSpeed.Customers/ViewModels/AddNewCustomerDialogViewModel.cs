@@ -1,4 +1,6 @@
 ﻿using LightSpeed.Common.Dialogs;
+using LightSpeed.Data;
+using LightSpeed.Data.Models;
 using Prism.Services.Dialogs;
 
 namespace LightSpeed.Customers.Dialogs
@@ -66,25 +68,41 @@ namespace LightSpeed.Customers.Dialogs
             if (boolParam.ToLower() == "true")
             {
                 buttonResult = true;
+                SaveToDatabase();
             }
 
             var dialogResult = new DialogResult(buttonResult);
 
-            
-            dialogResult.Parameters.Add("CustomerFirstName", CustomerFirstName);
-            dialogResult.Parameters.Add("CustomerLastName", CustomerLastName);
-            dialogResult.Parameters.Add("CustomerEmail", CustomerEmail);
-            dialogResult.Parameters.Add("CustomerAddress", CustomerAddress);
-            dialogResult.Parameters.Add("CustomerCity", CustomerCity);
-            dialogResult.Parameters.Add("CustomerState", CustomerState);
-            dialogResult.Parameters.Add("CustomerZipCode", CustomerZipCode);
-
-
             RaiseRequestClose(dialogResult);
+        }
+
+        public void ValidateData()
+        {
+
+        }
+
+        public void SaveToDatabase()
+        {
+            using (var context = new LightSpeedDataContext())
+            {
+                var customer = new Customer();
+                customer.FirstName = CustomerFirstName;
+                customer.LastName = CustomerLastName;
+                customer.Email = CustomerEmail;
+                customer.Address = CustomerAddress;
+                customer.City = CustomerCity;
+                customer.State = CustomerState;
+                customer.ZipCode = CustomerZipCode;
+
+                context.Customers.Add(customer);
+                context.SaveChanges();
+            }
         }
 
         public override void OnDialogOpened(IDialogParameters parameters)
         {
+
+
             //Message = parameters.GetValue<string>("message");
         }
     }
