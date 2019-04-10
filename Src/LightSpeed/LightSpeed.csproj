@@ -1,4 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -11,5 +12,10 @@
   <ItemGroup>
     <ProjectReference Include="..\LightSpeed.Core\LightSpeed.Core.csproj" />
     <ProjectReference Include="..\LightSpeed.Data\LightSpeed.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Syncfusion.SfAccordion.WPF">
+      <HintPath>C:\Program Files (x86)\Syncfusion\Essential Studio\WPF\17.1.0.38\precompiledassemblies\netcoreapp3.0\Syncfusion.SfAccordion.WPF.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <Menu>
         <MenuItem Header="File">
+            <MenuItem Header="Options" Command="{Binding OpenApplicationOptionsDialog}" />
             <MenuItem Header="Exit" />
         </MenuItem>
     </Menu>

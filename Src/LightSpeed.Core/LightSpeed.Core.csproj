@@ -11,6 +11,8 @@
     <OutputPath></OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Dialogs\ApplicationOptionsDialog.xaml" />
+    <None Remove="Dialogs\ApplicationOptionViewA.xaml" />
     <None Remove="Views\MenuView.xaml" />
     <None Remove="Views\NavigationView.xaml" />
   </ItemGroup>
@@ -25,5 +27,13 @@
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Dialogs\ApplicationOptionsDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dialogs\ApplicationOptionViewA.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
