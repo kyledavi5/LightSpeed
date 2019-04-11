@@ -7,7 +7,7 @@
     <AssemblyName>LightSpeed</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Prism.DryIoc" Version="7.2.0.1156-ci" />
+    <PackageReference Include="Prism.DryIoc" Version="7.2.0.1175-ci" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LightSpeed.Core\LightSpeed.Core.csproj" />
@@ -17,5 +17,10 @@
     <Reference Include="Syncfusion.SfAccordion.WPF">
       <HintPath>C:\Program Files (x86)\Syncfusion\Essential Studio\WPF\17.1.0.38\precompiledassemblies\netcoreapp3.0\Syncfusion.SfAccordion.WPF.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appdata.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using LightSpeed.Data;
 using System.ComponentModel;
 using System.Windows.Data;
+using LightSpeed.Common.Dialogs;
 
 namespace LightSpeed.Customers.ViewModels
 {
@@ -33,31 +34,24 @@ namespace LightSpeed.Customers.ViewModels
             set { SetProperty(ref _customerCollection, value); }
         }
 
-        private DelegateCommand _openViewCustomerDetailsDialogCommand;
-        public DelegateCommand OpenViewCustomerDetailsDialogCommand =>
-            _openViewCustomerDetailsDialogCommand ?? (_openViewCustomerDetailsDialogCommand = new DelegateCommand(OpenCustomerDetailsDialog));
+        private DelegateCommand<string> _openCustomerDetailsDialogCommand;
+        public DelegateCommand<string> OpenNewCustomerDialogCommand =>
+            _openCustomerDetailsDialogCommand ?? (_openCustomerDetailsDialogCommand = new DelegateCommand<string>(OpenCustomerDetailsDialog));
 
-        private DelegateCommand _openNewCustomerDialogCommand;
-        public DelegateCommand OpenNewCustomerDialogCommand =>
-            _openNewCustomerDialogCommand ?? (_openNewCustomerDialogCommand = new DelegateCommand(OpenNewCustomerDialog));
-
-        void OpenNewCustomerDialog()
+        void OpenCustomerDetailsDialog(string dataMode)
         {
-            _dialogService.ShowDialog("AddNewCustomerDialog",null, r =>
+            if (dataMode == "Edit")
             {
-                LoadTableData();     
-            });
-        }
-
-        void OpenCustomerDetailsDialog()
-        {
-            var customerId = SelectedItem.Id;
-
-            _dialogService.ShowDialog("UpdateCustomerDetailsDialog", new DialogParameters($"CustomerID={customerId}"), r => 
+                var customerId = SelectedItem.Id;
+                
+            _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"IdentifierID={customerId},DataDialogMode={dataMode}"), r => 
             {
                 LoadTableData();
             });
+            }
+            
         }
+
         public CustomersMasterViewModel(IDialogService dialogService)
         {
             _dialogService = dialogService;

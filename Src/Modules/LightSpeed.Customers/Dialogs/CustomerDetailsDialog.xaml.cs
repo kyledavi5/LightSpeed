@@ -17,9 +17,9 @@ namespace LightSpeed.Customers.Dialogs
     /// <summary>
     /// Interaction logic for NotificationDialog.xaml
     /// </summary>
-    public partial class UpdateCustomerDetailsDialog : UserControl
+    public partial class CustomerDetailsDialog : UserControl
     {
-        public UpdateCustomerDetailsDialog()
+        public CustomerDetailsDialog()
         {
             InitializeComponent();
         }

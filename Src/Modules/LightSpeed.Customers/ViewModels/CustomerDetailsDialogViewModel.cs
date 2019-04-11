@@ -5,7 +5,7 @@ using Prism.Services.Dialogs;
 
 namespace LightSpeed.Customers.Dialogs
 {
-    public class AddNewCustomerDialogViewModel : DialogViewModelBase
+    public class CustomerDetailsDialogViewModel : DataDialogViewModelBase
     {
         private string _customerFirstName;
         public string CustomerFirstName
@@ -56,36 +56,33 @@ namespace LightSpeed.Customers.Dialogs
             set { SetProperty(ref _customerZipCode, value); }
         }
 
-        public AddNewCustomerDialogViewModel()
+        public CustomerDetailsDialogViewModel()
         {
             
         }
 
-        protected override void CloseDialog(string boolParam)
-        {
-            bool buttonResult = false;
-
-            if (boolParam.ToLower() == "true")
-            {
-                buttonResult = true;
-                SaveToDatabase();
-            }
-
-            var dialogResult = new DialogResult(buttonResult);
-
-            RaiseRequestClose(dialogResult);
-        }
-
-        public void ValidateData()
-        {
-
-        }
-
-        public void SaveToDatabase()
+        protected override void LoadRecordData()
         {
             using (var context = new LightSpeedDataContext())
             {
-                var customer = new Customer();
+                var customer = context.Customers.Find(Identifier);
+
+                CustomerFirstName = customer.FirstName;
+                CustomerLastName = customer.LastName;
+                CustomerEmail = customer.Email;
+                CustomerAddress = customer.Address;
+                CustomerCity = customer.City;
+                CustomerState = customer.State;
+                CustomerZipCode = customer.ZipCode;
+            }
+        }
+
+        private void SaveRecordData()
+        {
+            using (var context = new LightSpeedDataContext())
+            {
+                Customer customer = new Customer();
+
                 customer.FirstName = CustomerFirstName;
                 customer.LastName = CustomerLastName;
                 customer.Email = CustomerEmail;
@@ -94,16 +91,18 @@ namespace LightSpeed.Customers.Dialogs
                 customer.State = CustomerState;
                 customer.ZipCode = CustomerZipCode;
 
-                context.Customers.Add(customer);
                 context.SaveChanges();
             }
         }
 
-        public override void OnDialogOpened(IDialogParameters parameters)
+        public override void RaiseRequestClose(IDialogResult dialogResult)
         {
+            if(dialogResult.Result == true)
+            {
+                SaveRecordData();
+            }
 
-
-            //Message = parameters.GetValue<string>("message");
+            base.RaiseRequestClose(dialogResult);
         }
     }
 }

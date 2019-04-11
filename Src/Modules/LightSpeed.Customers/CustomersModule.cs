@@ -19,8 +19,7 @@ namespace LightSpeed.Customers
         {
             containerRegistry.RegisterForNavigation<CustomersMasterView>();
             containerRegistry.RegisterDialog<NotificationDialog, NotificationDialogViewModel>();
-            containerRegistry.RegisterDialog<AddNewCustomerDialog, AddNewCustomerDialogViewModel>();
-            containerRegistry.RegisterDialog<UpdateCustomerDetailsDialog, UpdateCustomerDetailsDialogViewModel>();
+            containerRegistry.RegisterDialog<CustomerDetailsDialog, CustomerDetailsDialogViewModel>();
         }
     }
 }
