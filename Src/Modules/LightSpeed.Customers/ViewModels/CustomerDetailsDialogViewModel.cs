@@ -1,4 +1,5 @@
 ﻿using LightSpeed.Common.Dialogs;
+using LightSpeed.Common.Enums;
 using LightSpeed.Data;
 using LightSpeed.Data.Models;
 using Prism.Services.Dialogs;
@@ -65,7 +66,7 @@ namespace LightSpeed.Customers.Dialogs
         {
             using (var context = new LightSpeedDataContext())
             {
-                var customer = context.Customers.Find(Identifier);
+                Customer customer = context.Customers.Find(Identifier);
 
                 CustomerFirstName = customer.FirstName;
                 CustomerLastName = customer.LastName;
@@ -91,6 +92,26 @@ namespace LightSpeed.Customers.Dialogs
                 customer.State = CustomerState;
                 customer.ZipCode = CustomerZipCode;
 
+                context.Customers.Add(customer);
+
+                context.SaveChanges();
+            }
+        }
+
+        protected override void UpdateRecordData()
+        {
+            using (var context = new LightSpeedDataContext())
+            {
+                Customer customer = context.Customers.Find(Identifier);
+
+                customer.FirstName = CustomerFirstName;
+                customer.LastName = CustomerLastName;
+                customer.Email = CustomerEmail;
+                customer.Address = CustomerAddress;
+                customer.City = CustomerCity;
+                customer.State = CustomerState;
+                customer.ZipCode = CustomerZipCode;
+
                 context.SaveChanges();
             }
         }
@@ -99,7 +120,15 @@ namespace LightSpeed.Customers.Dialogs
         {
             if(dialogResult.Result == true)
             {
-                SaveRecordData();
+                if (DataMode == DialogDataMode.Create)
+                {
+                    SaveRecordData();
+                }
+                if (DataMode == DialogDataMode.Update)
+                {
+                    UpdateRecordData();
+                }
+                
             }
 
             base.RaiseRequestClose(dialogResult);

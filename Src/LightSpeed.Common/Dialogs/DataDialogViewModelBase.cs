@@ -10,18 +10,13 @@ namespace LightSpeed.Common.Dialogs
     {
         public int Identifier { get; set; }
 
-        public DialogDataMode DataMode { get; private set; }
+        public DialogDataMode DataMode { get; set; }
 
         private DelegateCommand<string> _closeDialogCommand;
         public DelegateCommand<string> CloseDialogCommand =>
             _closeDialogCommand ?? (_closeDialogCommand = new DelegateCommand<string>(CloseDialog));
 
-        private string _title;
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+        public string Title { get; set; }
 
         public event Action<IDialogResult> RequestClose;
 
@@ -81,6 +76,11 @@ namespace LightSpeed.Common.Dialogs
                     // throw exeception
                     break;
             }
+        }
+        
+        protected virtual void UpdateRecordData()
+        {
+
         }
 
         protected virtual void LoadRecordData()

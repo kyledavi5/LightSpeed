@@ -35,19 +35,27 @@ namespace LightSpeed.Customers.ViewModels
         }
 
         private DelegateCommand<string> _openCustomerDetailsDialogCommand;
-        public DelegateCommand<string> OpenNewCustomerDialogCommand =>
+        public DelegateCommand<string> OpenCustomerDetailsDialogCommand =>
             _openCustomerDetailsDialogCommand ?? (_openCustomerDetailsDialogCommand = new DelegateCommand<string>(OpenCustomerDetailsDialog));
 
-        void OpenCustomerDetailsDialog(string dataMode)
+        public void OpenCustomerDetailsDialog(string dataMode)
         {
-            if (dataMode == "Edit")
+            if (dataMode == "Update")
             {
                 var customerId = SelectedItem.Id;
-                
-            _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"IdentifierID={customerId},DataDialogMode={dataMode}"), r => 
+
+                _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"IdentifierID={customerId}&DialogDataMode={dataMode}"), r => 
+                {
+                    LoadTableData();
+                });
+            }
+
+            if (dataMode == "Create")
             {
-                LoadTableData();
-            });
+                _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"DialogDataMode={dataMode}"), r =>
+                {
+                    LoadTableData();
+                });
             }
             
         }
