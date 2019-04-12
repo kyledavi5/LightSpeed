@@ -40,24 +40,33 @@ namespace LightSpeed.Customers.ViewModels
 
         public void OpenCustomerDetailsDialog(string dataMode)
         {
-            if (dataMode == "Update")
-            {
-                var customerId = SelectedItem.Id;
-
-                _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"IdentifierID={customerId}&DialogDataMode={dataMode}"), r => 
-                {
-                    LoadTableData();
-                });
-            }
-
             if (dataMode == "Create")
             {
                 _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"DialogDataMode={dataMode}"), r =>
                 {
-                    LoadTableData();
+                    
                 });
             }
-            
+            else if (dataMode == "Update")
+            {
+                var customerId = SelectedItem.Id;
+
+                _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"IdentifierID={customerId}&DialogDataMode={dataMode}"), r =>
+                {
+                    
+                });
+            }
+            else if (dataMode == "UpdateDelete")
+            {
+                var customerId = SelectedItem.Id;
+
+                _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"IdentifierID={customerId}&DialogDataMode={dataMode}"), r =>
+                {
+                    
+                });
+            }
+
+            LoadTableData();
         }
 
         public CustomersMasterViewModel(IDialogService dialogService)

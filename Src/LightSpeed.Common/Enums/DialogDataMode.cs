@@ -8,6 +8,7 @@ namespace LightSpeed.Common.Enums
     {
         Read,
         Update,
-        Create
+        Create,
+        UpdateDelete
     }
 }

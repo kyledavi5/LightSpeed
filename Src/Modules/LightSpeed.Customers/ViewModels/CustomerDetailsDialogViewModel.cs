@@ -1,12 +1,15 @@
-﻿using LightSpeed.Common.Dialogs;
+﻿using System;
+using LightSpeed.Common.Dialogs;
 using LightSpeed.Common.Enums;
 using LightSpeed.Data;
 using LightSpeed.Data.Models;
+using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Services.Dialogs;
 
 namespace LightSpeed.Customers.Dialogs
 {
-    public class CustomerDetailsDialogViewModel : DataDialogViewModelBase
+    public class CustomerDetailsDialogViewModel : BindableBase, IDialogAware
     {
         private string _customerFirstName;
         public string CustomerFirstName
@@ -57,12 +60,69 @@ namespace LightSpeed.Customers.Dialogs
             set { SetProperty(ref _customerZipCode, value); }
         }
 
+        public string Title { get; set; }
+
+        public int Identifier { get; set; }
+
+        public DialogDataMode DataMode { get; set; }
+
+        private DelegateCommand<string> _closeDialogCommand;
+        public DelegateCommand<string> CloseDialogCommand =>
+            _closeDialogCommand ?? (_closeDialogCommand = new DelegateCommand<string>(CloseDialog));
+
+        
+
         public CustomerDetailsDialogViewModel()
         {
             
         }
 
-        protected override void LoadRecordData()
+        public void OnDialogOpened(IDialogParameters parameters)
+        {
+            string dataMode = parameters.GetValue<string>("DialogDataMode");
+
+            switch (dataMode)
+            {
+                case "Create":
+                    DataMode = DialogDataMode.Create;
+                    break;
+                case "Read":
+                    DataMode = DialogDataMode.Read;
+                    Identifier = parameters.GetValue<int>("IdentifierID");
+                    LoadRecordData();
+                    break;
+                case "Update":
+                    DataMode = DialogDataMode.Update;
+                    Identifier = parameters.GetValue<int>("IdentifierID");
+                    LoadRecordData();
+                    break;
+                case "UpdateDelete":
+                    DataMode = DialogDataMode.UpdateDelete;
+                    Identifier = parameters.GetValue<int>("IdentifierID");
+                    LoadRecordData();
+                    break;
+                default:
+                    // throw exeception
+                    break;
+            }
+        }
+
+        event Action<IDialogResult> IDialogAware.RequestClose
+        {
+            add
+            {
+                
+            }
+
+            remove
+            {
+                
+            }
+        }
+
+        public event Action<IDialogResult> RequestClose;
+
+        private void LoadRecordData()
         {
             using (var context = new LightSpeedDataContext())
             {
@@ -98,7 +158,7 @@ namespace LightSpeed.Customers.Dialogs
             }
         }
 
-        protected override void UpdateRecordData()
+        private void UpdateRecordData()
         {
             using (var context = new LightSpeedDataContext())
             {
@@ -116,7 +176,44 @@ namespace LightSpeed.Customers.Dialogs
             }
         }
 
-        public override void RaiseRequestClose(IDialogResult dialogResult)
+        public void DeleteDataCloseDialog(string confirmedDelete)
+        {
+            
+        }
+
+        protected void DeleteRecordData()
+        {
+            using (var context = new LightSpeedDataContext())
+            {
+                Customer customer = context.Customers.Find(Identifier);
+
+                context.Remove(customer);
+
+                context.SaveChanges();
+            }
+        }
+
+        protected void CloseDialog(string boolParam)
+        {
+            bool buttonResult;
+
+            if (boolParam.ToLower() == "true")
+            {
+                buttonResult = true;
+            }
+            else
+            {
+                buttonResult = false;
+            }
+
+
+
+            var dialogResult = new DialogResult(buttonResult);
+        }
+
+        
+
+        public void RaiseRequestClose(IDialogResult dialogResult)
         {
             if(dialogResult.Result == true)
             {
@@ -128,10 +225,23 @@ namespace LightSpeed.Customers.Dialogs
                 {
                     UpdateRecordData();
                 }
-                
+                if (DataMode == DialogDataMode.UpdateDelete)
+                {
+                    DeleteRecordData();
+                }
             }
 
-            base.RaiseRequestClose(dialogResult);
+            RequestClose?.Invoke(dialogResult);
+        }
+
+        public bool CanCloseDialog()
+        {
+            return true;
+        }
+
+        public void OnDialogClosed()
+        {
+           
         }
     }
 }
