@@ -34,37 +34,24 @@ namespace LightSpeed.Customers.ViewModels
             set { SetProperty(ref _customerCollection, value); }
         }
 
-        private DelegateCommand<string> _openCustomerDetailsDialogCommand;
-        public DelegateCommand<string> OpenCustomerDetailsDialogCommand =>
-            _openCustomerDetailsDialogCommand ?? (_openCustomerDetailsDialogCommand = new DelegateCommand<string>(OpenCustomerDetailsDialog));
+        private DelegateCommand _openCustomerDetailsDialogCommand;
+        public DelegateCommand OpenCustomerDetailsDialogCommand =>
+            _openCustomerDetailsDialogCommand ?? (_openCustomerDetailsDialogCommand = new DelegateCommand(OpenCustomerDetailsDialog));
 
-        public void OpenCustomerDetailsDialog(string dataMode)
+        private DelegateCommand _openCreateCustomerDialogCommand;
+        public DelegateCommand OpenCreateCustomerDialogCommand =>
+            _openCreateCustomerDialogCommand ?? (_openCreateCustomerDialogCommand = new DelegateCommand(OpenCreateCustomerDialog));
+
+        private void OpenCreateCustomerDialog()
         {
-            if (dataMode == "Create")
-            {
-                _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"DialogDataMode={dataMode}"), r =>
-                {
-                    
-                });
-            }
-            else if (dataMode == "Update")
-            {
-                var customerId = SelectedItem.Id;
+            _dialogService.ShowDialog("CustomerDetailsDialog", null, null);
+        }
 
-                _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"IdentifierID={customerId}&DialogDataMode={dataMode}"), r =>
-                {
-                    
-                });
-            }
-            else if (dataMode == "UpdateDelete")
-            {
-                var customerId = SelectedItem.Id;
+        public void OpenCustomerDetailsDialog()
+        {
+            var customerId = SelectedItem.Id;
 
-                _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"IdentifierID={customerId}&DialogDataMode={dataMode}"), r =>
-                {
-                    
-                });
-            }
+            _dialogService.ShowDialog("CustomerDetailsDialog", new DialogParameters($"IdentifierID={customerId}"), null);
 
             LoadTableData();
         }
@@ -79,7 +66,6 @@ namespace LightSpeed.Customers.ViewModels
         {
             using (var context = new LightSpeedDataContext())
             {
-                
                 CustomerCollection = new ObservableCollection<Customer>(context.Customers.ToList());
             }   
         }

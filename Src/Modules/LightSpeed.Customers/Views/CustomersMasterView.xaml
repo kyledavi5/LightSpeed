@@ -11,7 +11,7 @@
                   Width="800" Height="400" Margin="0,5,0,0"  HorizontalAlignment="Center" VerticalAlignment="Top">
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick"
-                              Command="{Binding OpenCustomerDetailsDialogCommand}" CommandParameter="Update" />
+                              Command="{Binding OpenCustomerDetailsDialogCommand}" CommandParameter="" />
             </DataGrid.InputBindings>
         </DataGrid>
     </StackPanel>

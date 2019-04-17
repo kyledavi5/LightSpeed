@@ -1,4 +1,5 @@
 ﻿using LightSpeed.Common.Dialogs;
+using LightSpeed.Common.Services;
 using LightSpeed.Customers.Dialogs;
 using LightSpeed.Customers.Views;
 using Prism.Ioc;
@@ -20,6 +21,7 @@ namespace LightSpeed.Customers
             containerRegistry.RegisterForNavigation<CustomersMasterView>();
             containerRegistry.RegisterDialog<NotificationDialog, NotificationDialogViewModel>();
             containerRegistry.RegisterDialog<CustomerDetailsDialog, CustomerDetailsDialogViewModel>();
+            containerRegistry.RegisterSingleton<ICustomerRepository, CustomerRepository>();
         }
     }
 }

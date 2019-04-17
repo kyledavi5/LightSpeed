@@ -1,6 +1,6 @@
 ﻿using System;
 using LightSpeed.Common.Dialogs;
-using LightSpeed.Common.Enums;
+using LightSpeed.Common.Services;
 using LightSpeed.Data;
 using LightSpeed.Data.Models;
 using Prism.Commands;
@@ -11,6 +11,16 @@ namespace LightSpeed.Customers.Dialogs
 {
     public class CustomerDetailsDialogViewModel : BindableBase, IDialogAware
     {
+
+        private int _recordIdentifier;
+        public int RecordIdentifier
+        {
+            get { return _recordIdentifier; }
+            set { SetProperty(ref _recordIdentifier, value); }
+        }
+
+
+
         private string _customerFirstName;
         public string CustomerFirstName
         {
@@ -25,46 +35,8 @@ namespace LightSpeed.Customers.Dialogs
             set { SetProperty(ref _customerLastName, value); }
         }
 
-        private string _customerEmail;
-        public string CustomerEmail
-        {
-            get { return _customerEmail; }
-            set { SetProperty(ref _customerEmail, value); }
-        }
-
-        private string _customerAddress;
-        public string CustomerAddress
-        {
-            get { return _customerAddress; }
-            set { SetProperty(ref _customerAddress, value); }
-        }
-
-        private string _customerCity;
-        public string CustomerCity
-        {
-            get { return _customerCity; }
-            set { SetProperty(ref _customerCity, value); }
-        }
-
-        private string _customerState;
-        public string CustomerState
-        {
-            get { return _customerState; }
-            set { SetProperty(ref _customerState, value); }
-        }
-
-        private string _customerZipCode;
-        public string CustomerZipCode
-        {
-            get { return _customerZipCode; }
-            set { SetProperty(ref _customerZipCode, value); }
-        }
-
+        private object _customerRepository;
         public string Title { get; set; }
-
-        public int Identifier { get; set; }
-
-        public DialogDataMode DataMode { get; set; }
 
         private DelegateCommand<string> _closeDialogCommand;
         public DelegateCommand<string> CloseDialogCommand =>
@@ -72,125 +44,61 @@ namespace LightSpeed.Customers.Dialogs
 
         
 
-        public CustomerDetailsDialogViewModel()
+        public event Action<IDialogResult> RequestClose;
+
+        private DelegateCommand _DeleteRecordCommand;
+        public DelegateCommand DeleteRecordCommand => _DeleteRecordCommand ?? (_DeleteRecordCommand = new DelegateCommand(DeleteRecord));
+
+        public void DeleteRecord()
         {
-            
+            //TODO: Display a confirmation dialog that prompts the user for record deletion confirmation
+
+            // get the results of the confirmation from the command parameter (true/false)
+
+            // assign a bool value to a result variable
+
+            // evaluate the results of the bool variable and if true call the delete record command   
+        }
+
+        public CustomerDetailsDialogViewModel(ICustomerRepository customerRepository)
+        {
+            _customerRepository = customerRepository;
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
-        {
-            string dataMode = parameters.GetValue<string>("DialogDataMode");
-
-            switch (dataMode)
+        { 
+            foreach (var parameterKey in parameters.Keys)
             {
-                case "Create":
-                    DataMode = DialogDataMode.Create;
-                    break;
-                case "Read":
-                    DataMode = DialogDataMode.Read;
-                    Identifier = parameters.GetValue<int>("IdentifierID");
-                    LoadRecordData();
-                    break;
-                case "Update":
-                    DataMode = DialogDataMode.Update;
-                    Identifier = parameters.GetValue<int>("IdentifierID");
-                    LoadRecordData();
-                    break;
-                case "UpdateDelete":
-                    DataMode = DialogDataMode.UpdateDelete;
-                    Identifier = parameters.GetValue<int>("IdentifierID");
-                    LoadRecordData();
-                    break;
-                default:
-                    // throw exeception
-                    break;
-            }
+                if(parameterKey == "RecordIdentifier")
+                {
+                    RecordIdentifier = parameters.GetValue<int>("RecordIdentifier");
+                }
+            }            
         }
 
-        event Action<IDialogResult> IDialogAware.RequestClose
-        {
-            add
-            {
-                
-            }
-
-            remove
-            {
-                
-            }
-        }
-
-        public event Action<IDialogResult> RequestClose;
 
         private void LoadRecordData()
         {
-            using (var context = new LightSpeedDataContext())
-            {
-                Customer customer = context.Customers.Find(Identifier);
+            Customer customer = new Customer();
+            //customer = _customerRepository.GetCustomerById(recordIdentifier);
+            
+            CustomerFirstName = customer.FirstName;
+            CustomerLastName = customer.LastName;
 
-                CustomerFirstName = customer.FirstName;
-                CustomerLastName = customer.LastName;
-                CustomerEmail = customer.Email;
-                CustomerAddress = customer.Address;
-                CustomerCity = customer.City;
-                CustomerState = customer.State;
-                CustomerZipCode = customer.ZipCode;
-            }
         }
 
         private void SaveRecordData()
         {
-            using (var context = new LightSpeedDataContext())
-            {
-                Customer customer = new Customer();
-
-                customer.FirstName = CustomerFirstName;
-                customer.LastName = CustomerLastName;
-                customer.Email = CustomerEmail;
-                customer.Address = CustomerAddress;
-                customer.City = CustomerCity;
-                customer.State = CustomerState;
-                customer.ZipCode = CustomerZipCode;
-
-                context.Customers.Add(customer);
-
-                context.SaveChanges();
-            }
+            
         }
 
         private void UpdateRecordData()
         {
-            using (var context = new LightSpeedDataContext())
-            {
-                Customer customer = context.Customers.Find(Identifier);
+            //TODO: determine if the user is authorized to perform and a record update
 
-                customer.FirstName = CustomerFirstName;
-                customer.LastName = CustomerLastName;
-                customer.Email = CustomerEmail;
-                customer.Address = CustomerAddress;
-                customer.City = CustomerCity;
-                customer.State = CustomerState;
-                customer.ZipCode = CustomerZipCode;
+            //TODO: determine if any of the fields have changes as a way to see if the update method needs to be called
 
-                context.SaveChanges();
-            }
-        }
-
-        public void DeleteDataCloseDialog(string confirmedDelete)
-        {
-            
-        }
-
-        protected void DeleteRecordData()
-        {
-            using (var context = new LightSpeedDataContext())
-            {
-                Customer customer = context.Customers.Find(Identifier);
-
-                context.Remove(customer);
-
-                context.SaveChanges();
-            }
+            //TODO: Implement CustomerRepository instead
         }
 
         protected void CloseDialog(string boolParam)
@@ -206,29 +114,16 @@ namespace LightSpeed.Customers.Dialogs
                 buttonResult = false;
             }
 
-
-
             var dialogResult = new DialogResult(buttonResult);
-        }
 
-        
+            RaiseRequestClose(dialogResult);
+        }
 
         public void RaiseRequestClose(IDialogResult dialogResult)
         {
             if(dialogResult.Result == true)
             {
-                if (DataMode == DialogDataMode.Create)
-                {
-                    SaveRecordData();
-                }
-                if (DataMode == DialogDataMode.Update)
-                {
-                    UpdateRecordData();
-                }
-                if (DataMode == DialogDataMode.UpdateDelete)
-                {
-                    DeleteRecordData();
-                }
+                
             }
 
             RequestClose?.Invoke(dialogResult);

@@ -6,8 +6,8 @@
         Title="LightSpeed" Height="700" Width="1150" >
     <DockPanel LastChildFill="True">
         <UserControl DockPanel.Dock="Top" prism:RegionManager.RegionName="HeaderRegion" />
-        <UserControl DockPanel.Dock="Left" prism:RegionManager.RegionName="LeftRegion" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="25,20,0,5" />
+        <UserControl DockPanel.Dock="Left" prism:RegionManager.RegionName="NavigationRegion" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="25,20,0,5" />
         <UserControl DockPanel.Dock="Bottom" prism:RegionManager.RegionName="FooterRegion" />
-        <UserControl DockPanel.Dock="Left" prism:RegionManager.RegionName="RightRegion" HorizontalAlignment="Center" VerticalAlignment="Top" Width="890" Margin="5,20,0,5"/>
+        <UserControl DockPanel.Dock="Left" prism:RegionManager.RegionName="ContentRegion" HorizontalAlignment="Center" VerticalAlignment="Top" Width="890" Margin="5,20,0,5"/>
     </DockPanel>
 </Window>
