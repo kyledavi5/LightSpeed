@@ -5,8 +5,8 @@
     <AssemblyName>LightSpeed.Customers</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Dialogs\CustomerDetailsDialog.xaml" />
-    <None Remove="Views\CustomersMasterView.xaml" />
+    <None Remove="Dialogs\SomethingDetailsDialog.xaml" />
+    <None Remove="Views\SomethingsMasterView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1175-ci" />
@@ -16,7 +16,7 @@
     <ProjectReference Include="..\..\LightSpeed.Data\LightSpeed.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Dialogs\CustomerDetailsDialog.xaml.cs">
+    <Compile Update="Dialogs\SomethingDetailsDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

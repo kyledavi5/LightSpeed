@@ -7,10 +7,13 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 
-namespace LightSpeed.Customers.Dialogs
+namespace LightSpeed.Something.Dialogs
 {
-    public class CustomerDetailsDialogViewModel : BindableBase, IDialogAware
+    public class SomethingDetailsDialogViewModel : BindableBase, IDialogAware
     {
+        private ISomethingRepository _somethingRepository;
+
+        public event Action<IDialogResult> RequestClose;
 
         private int _recordIdentifier;
         public int RecordIdentifier
@@ -19,50 +22,46 @@ namespace LightSpeed.Customers.Dialogs
             set { SetProperty(ref _recordIdentifier, value); }
         }
 
-
-
-        private string _customerFirstName;
-        public string CustomerFirstName
+        private string _title;
+        public string Title
         {
-            get { return _customerFirstName; }
-            set { SetProperty(ref _customerFirstName, value); }
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
-        private string _customerLastName;
-        public string CustomerLastName
+        private string _somethingName;
+        public string SomethingName
         {
-            get { return _customerLastName; }
-            set { SetProperty(ref _customerLastName, value); }
+            get { return _somethingName; }
+            set { SetProperty(ref _somethingName, value); }
         }
 
-        private object _customerRepository;
-        public string Title { get; set; }
+        private string _somethingDescription;
+        public string SomethingDescription
+        {
+            get { return _somethingDescription; }
+            set { SetProperty(ref _somethingDescription, value); }
+        }
 
         private DelegateCommand<string> _closeDialogCommand;
-        public DelegateCommand<string> CloseDialogCommand =>
-            _closeDialogCommand ?? (_closeDialogCommand = new DelegateCommand<string>(CloseDialog));
+        public DelegateCommand<string> CloseDialogCommand => _closeDialogCommand ?? (_closeDialogCommand = new DelegateCommand<string>(CloseDialog));
 
-        
+        private DelegateCommand _deleteRecordCommand;
+        public DelegateCommand DeleteRecordCommand => _deleteRecordCommand ?? (_deleteRecordCommand = new DelegateCommand(DeleteRecord));
 
-        public event Action<IDialogResult> RequestClose;
-
-        private DelegateCommand _DeleteRecordCommand;
-        public DelegateCommand DeleteRecordCommand => _DeleteRecordCommand ?? (_DeleteRecordCommand = new DelegateCommand(DeleteRecord));
+        public SomethingDetailsDialogViewModel(ISomethingRepository SomethingRepository)
+        {
+            _somethingRepository = SomethingRepository;
+        }
 
         public void DeleteRecord()
         {
             //TODO: Display a confirmation dialog that prompts the user for record deletion confirmation
 
-            // get the results of the confirmation from the command parameter (true/false)
-
-            // assign a bool value to a result variable
-
-            // evaluate the results of the bool variable and if true call the delete record command   
-        }
-
-        public CustomerDetailsDialogViewModel(ICustomerRepository customerRepository)
-        {
-            _customerRepository = customerRepository;
+            //TODO: write delete record confirmation logic
+                // get the results of the confirmation from the command parameter (true/false)
+                // assign a bool value to a result variable
+                // evaluate the result variable and if true call the delete record command   
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
@@ -76,14 +75,13 @@ namespace LightSpeed.Customers.Dialogs
             }            
         }
 
-
         private void LoadRecordData()
         {
-            Customer customer = new Customer();
-            //customer = _customerRepository.GetCustomerById(recordIdentifier);
+            Something Something = new Something();
+            Something = _somethingRepository.GetSomethingById(RecordIdentifier);
             
-            CustomerFirstName = customer.FirstName;
-            CustomerLastName = customer.LastName;
+            SomethingName = Something.Name;
+            SomethingDescription = Something.Description;
 
         }
 
@@ -94,11 +92,9 @@ namespace LightSpeed.Customers.Dialogs
 
         private void UpdateRecordData()
         {
-            //TODO: determine if the user is authorized to perform and a record update
+            //TODO: write logic for determining if the user requesting the record update is authorized for the action
 
             //TODO: determine if any of the fields have changes as a way to see if the update method needs to be called
-
-            //TODO: Implement CustomerRepository instead
         }
 
         protected void CloseDialog(string boolParam)
@@ -123,7 +119,7 @@ namespace LightSpeed.Customers.Dialogs
         {
             if(dialogResult.Result == true)
             {
-                
+                // some record action
             }
 
             RequestClose?.Invoke(dialogResult);

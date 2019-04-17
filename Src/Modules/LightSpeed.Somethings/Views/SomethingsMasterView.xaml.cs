@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LightSpeed.Customers.Views
+namespace LightSpeed.Something.Views
 {
     /// <summary>
     /// Interaction logic for MasterView.xaml
     /// </summary>
-    public partial class CustomersMasterView : UserControl
+    public partial class SomethingMasterView : UserControl
     {
-        public CustomersMasterView()
+        public SomethingMasterView()
         {
             InitializeComponent();
         }

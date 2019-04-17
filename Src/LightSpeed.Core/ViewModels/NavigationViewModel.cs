@@ -25,7 +25,7 @@ namespace LightSpeed.Core.ViewModels
         {
             if(navigatePath != null)
             {
-                _regionManager.RequestNavigate("RightRegion", navigatePath);
+                _regionManager.RequestNavigate("ContentRegion", navigatePath);
             }
         }
     }

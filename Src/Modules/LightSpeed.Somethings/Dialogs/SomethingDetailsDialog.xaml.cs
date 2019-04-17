@@ -12,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LightSpeed.Customers.Dialogs
+namespace LightSpeed.Something.Dialogs
 {
     /// <summary>
     /// Interaction logic for NotificationDialog.xaml
     /// </summary>
-    public partial class CustomerDetailsDialog : UserControl
+    public partial class SomethingDetailsDialog : UserControl
     {
-        public CustomerDetailsDialog()
+        public SomethingDetailsDialog()
         {
             InitializeComponent();
         }

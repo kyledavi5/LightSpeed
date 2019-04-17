@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\LightSpeed.Core\LightSpeed.Core.csproj" />
     <ProjectReference Include="..\LightSpeed.Data\LightSpeed.Data.csproj" />
+    <ProjectReference Include="..\Modules\LightSpeed.Somethings\LightSpeed.Somethings.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appdata.db">

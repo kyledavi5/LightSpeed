@@ -5,29 +5,29 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LightSpeed.Customers
+namespace LightSpeed.Something
 {
-    public class CustomerRepository : ICustomerRepository
+    public class SomethingRepository : ISomethingRepository
     {
         //TODO: Make this inherit from generic repository base class
 
-        public Customer FindById(int Id)
+        public LightSpeed.Data.Models.Something FindById(int Id)
         {
-            Customer customer;
+            Something Something;
 
             using (var context = new LightSpeedDataContext())
             {
-                customer = context.Customers.Find(Id);
+                Something = context.Something.Find(Id);
             }
 
-            return customer;
+            return Something;
         }
 
-        public void Add(Customer customer)
+        public void Add(Something Something)
         {
             using (var context = new LightSpeedDataContext())
             {
-                context.Customers.Add(customer);
+                context.Something.Add(Something);
                 context.SaveChanges();
             }
         }
@@ -36,32 +36,32 @@ namespace LightSpeed.Customers
         {
             using (var context = new LightSpeedDataContext())
             {
-                Customer customer = context.Customers.Find(Id);
+                Something Something = context.Something.Find(Id);
 
-                context.Remove(customer);
+                context.Remove(Something);
 
                 context.SaveChanges();
             }
         }
 
-        public void Update(Customer customer)
+        public void Update(Something Something)
         {
             using (var context = new LightSpeedDataContext())
             {
-                context.Update(customer);
+                context.Update(Something);
 
                 context.SaveChanges();
             }
         }
 
-        public Customer GetCustomerById(int id)
+        public Something GetSomethingById(int id)
         {
             return null;
         }
 
 
 
-        public List<Customer> GetAll()
+        public List<Something> GetAll()
         {
             return null;
         }
@@ -71,7 +71,22 @@ namespace LightSpeed.Customers
             throw new NotImplementedException();
         }
 
-        public Customer Get(int id)
+        public Something Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(Data.Models.Something Something)
+        {
+            throw new NotImplementedException();
+        }
+
+        Data.Models.Something ISomethingRepository.Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Data.Models.Something> ISomethingRepository.GetAll()
         {
             throw new NotImplementedException();
         }

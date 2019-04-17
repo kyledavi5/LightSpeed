@@ -26,7 +26,7 @@ namespace LightSpeed
             moduleCatalog.AddModule<Core.CoreModule>();
             moduleCatalog.AddModule<Common.CommonModule>();
             moduleCatalog.AddModule<Data.DataModule>();
-            moduleCatalog.AddModule<Customers.CustomersModule>();
+            moduleCatalog.AddModule<Somethings.SomethingsModule>();
         }
     }
 }

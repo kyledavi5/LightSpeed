@@ -5,13 +5,13 @@ using System.Text;
 
 namespace LightSpeed.Common.Services
 {
-    public interface ICustomerRepository
+    public interface ISomethingRepository
     {
-        void Add(Customer customer);
+        void Add(Something Something);
 
-        Customer Get(int id);
+        Something Get(int id);
 
-        List<Customer> GetAll();
+        List<Something> GetAll();
 
         void Find();
     }
