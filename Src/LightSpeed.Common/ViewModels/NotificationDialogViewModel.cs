@@ -30,12 +30,13 @@ namespace LightSpeed.Common.Dialogs
 
         public bool CanCloseDialog()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return true;
         }
 
         public void OnDialogClosed()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

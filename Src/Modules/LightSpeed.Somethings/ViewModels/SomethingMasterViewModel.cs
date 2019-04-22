@@ -66,7 +66,7 @@ namespace LightSpeed.Somethings.ViewModels
         {
             using (var context = new LightSpeedDataContext())
             {
-                SomethingCollection = new ObservableCollection<Something>(context.Something.ToList());
+                SomethingCollection = new ObservableCollection<Something>(context.Somethings.ToList());
             }   
         }
     }

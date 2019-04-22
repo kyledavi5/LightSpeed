@@ -9,7 +9,7 @@ using Prism.Services.Dialogs;
 
 namespace LightSpeed.Somethings.Dialogs
 {
-    public class SomethingDetailsDialogViewModel : BindableBase, IDialogAware
+    public class CreateSomethingDialogViewModel : BindableBase, IDialogAware
     {
         private ISomethingRepository _somethingRepository;
 
@@ -21,6 +21,8 @@ namespace LightSpeed.Somethings.Dialogs
             get { return _recordIdentifier; }
             set { SetProperty(ref _recordIdentifier, value); }
         }
+
+        #region Data Bindings
 
         private string _title;
         public string Title
@@ -43,58 +45,43 @@ namespace LightSpeed.Somethings.Dialogs
             set { SetProperty(ref _somethingDescription, value); }
         }
 
+        #endregion
+
+        #region Commands
+
         private DelegateCommand<string> _closeDialogCommand;
         public DelegateCommand<string> CloseDialogCommand => _closeDialogCommand ?? (_closeDialogCommand = new DelegateCommand<string>(CloseDialog));
 
-        private DelegateCommand _deleteRecordCommand;
-        public DelegateCommand DeleteRecordCommand => _deleteRecordCommand ?? (_deleteRecordCommand = new DelegateCommand(DeleteRecord));
+        #endregion
 
-        public SomethingDetailsDialogViewModel(ISomethingRepository SomethingRepository)
+        public CreateSomethingDialogViewModel(ISomethingRepository SomethingRepository)
         {
             _somethingRepository = SomethingRepository;
         }
 
-        public void DeleteRecord()
-        {
-            //TODO: Display a confirmation dialog that prompts the user for record deletion confirmation
-
-            //TODO: write delete record confirmation logic
-                // get the results of the confirmation from the command parameter (true/false)
-                // assign a bool value to a result variable
-                // evaluate the result variable and if true call the delete record command   
-        }
-
         public void OnDialogOpened(IDialogParameters parameters)
         { 
-            foreach (var parameterKey in parameters.Keys)
-            {
-                if(parameterKey == "RecordIdentifier")
-                {
-                    RecordIdentifier = parameters.GetValue<int>("RecordIdentifier");
-                }
-            }            
-        }
-
-        private void LoadRecordData()
-        {
-            Something Something = new Something();
-            //Something = _somethingRepository //GetSomethingById(RecordIdentifier);
-            
-            SomethingName = Something.Name;
-            SomethingDescription = Something.Description;
-
+                
         }
 
         private void SaveRecordData()
         {
-            
+            using (var context = new LightSpeedDataContext())
+            {
+                var something = new Something();
+
+                something.Name = SomethingName;
+
+                context.Somethings.Add(something);
+
+                context.SaveChanges();
+                
+            }
         }
 
-        private void UpdateRecordData()
+        public bool CanCloseDialog()
         {
-            //TODO: write logic for determining if the user requesting the record update is authorized for the action
-
-            //TODO: determine if any of the fields have changes as a way to see if the update method needs to be called
+            return true;
         }
 
         protected void CloseDialog(string boolParam)
@@ -125,10 +112,7 @@ namespace LightSpeed.Somethings.Dialogs
             RequestClose?.Invoke(dialogResult);
         }
 
-        public bool CanCloseDialog()
-        {
-            return true;
-        }
+        
 
         public void OnDialogClosed()
         {

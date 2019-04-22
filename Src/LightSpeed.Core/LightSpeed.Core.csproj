@@ -21,7 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LightSpeed.Common\LightSpeed.Common.csproj" />
-    <ProjectReference Include="..\Modules\LightSpeed.Customers\LightSpeed.Somethings.csproj" />
+    <ProjectReference Include="..\Modules\LightSpeed.Somethings\LightSpeed.Somethings.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">

@@ -20,7 +20,12 @@ namespace LightSpeed.Core.Dialogs
         public DelegateCommand<string> Navigate =>
             _navigate ?? (_navigate = new DelegateCommand<string>(ExecuteNavigate));
 
-        public string Title { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private string _title;
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
 
         void ExecuteNavigate(string navigatePath)
         {
@@ -52,7 +57,7 @@ namespace LightSpeed.Core.Dialogs
 
         private void RaiseRequestClose(IDialogResult dialogResult)
         {
-
+            RequestClose.Invoke(dialogResult);
         }
 
 

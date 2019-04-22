@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LightSpeed.Something.Dialogs
+namespace LightSpeed.Somethings.Dialogs
 {
     /// <summary>
     /// Interaction logic for NotificationDialog.xaml

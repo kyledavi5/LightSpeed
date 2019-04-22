@@ -5,19 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LightSpeed.Something
+namespace LightSpeed.Somethings
 {
     public class SomethingRepository : ISomethingRepository
     {
         //TODO: Make this inherit from generic repository base class
 
-        public LightSpeed.Data.Models.Something FindById(int Id)
+        public Something FindById(int Id)
         {
             Something Something;
 
             using (var context = new LightSpeedDataContext())
             {
-                Something = context.Something.Find(Id);
+                Something = context.Somethings.Find(Id);
             }
 
             return Something;
@@ -27,7 +27,7 @@ namespace LightSpeed.Something
         {
             using (var context = new LightSpeedDataContext())
             {
-                context.Something.Add(Something);
+                context.Somethings.Add(Something);
                 context.SaveChanges();
             }
         }
@@ -36,7 +36,7 @@ namespace LightSpeed.Something
         {
             using (var context = new LightSpeedDataContext())
             {
-                Something Something = context.Something.Find(Id);
+                Something Something = context.Somethings.Find(Id);
 
                 context.Remove(Something);
 
@@ -76,10 +76,7 @@ namespace LightSpeed.Something
             throw new NotImplementedException();
         }
 
-        public void Add(Data.Models.Something Something)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         Data.Models.Something ISomethingRepository.Get(int id)
         {

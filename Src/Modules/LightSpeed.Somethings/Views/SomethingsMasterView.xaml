@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="LightSpeed.Something.Views.SomethingMasterView"
+﻿<UserControl x:Class="LightSpeed.Somethings.Views.SomethingsMasterView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <StackPanel>
         <TextBlock Text="Something Master" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,10" />
-        <Button Content="New" Command="{Binding OpenSomethingDetailsDialogCommand}" CommandParameter="Create" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Height="25" Margin="0,10,45,10" />
+        <Button Content="New" Command="{Binding OpenCreateSomethingDialogCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Height="25" Margin="0,10,45,10" />
         <DataGrid AutoGenerateColumns="True" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" 
                   ItemsSource="{Binding SomethingCollection}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
                   Width="800" Height="400" Margin="0,5,0,0"  HorizontalAlignment="Center" VerticalAlignment="Top">
