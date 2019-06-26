@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="LightSpeed.Somethings.Dialogs.SomethingDetailsDialog"
+﻿<UserControl x:Class="LightSpeed.Projects.Views.CreateProjectDialog"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
@@ -14,10 +14,10 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Text="Title" FontSize="28" Margin="2,5,2,20" />
 
-        <Button Content="Delete" Command="{Binding CloseDialogCommand}" CommandParameter="True" Grid.Row="2" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,250,5" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Text="Create Something" FontSize="28" Margin="2,5,2,20" />
+        <Label Grid.Row="1" Grid.Column="0" Content="Name:" />
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SomethingName}" />
         <Button Content="OK" Command="{Binding CloseDialogCommand}" CommandParameter="True" Grid.Row="2" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,130,5"/>
         <Button Content="Cancel" Command="{Binding CloseDialogCommand}" CommandParameter="False" IsDefault="True" Grid.Row="2" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,10,5" />
     </Grid>

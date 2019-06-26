@@ -1,33 +1,31 @@
-﻿using LightSpeed.Common.Services;
-using LightSpeed.Data;
+﻿using LightSpeed.Data;
 using LightSpeed.Data.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace LightSpeed.Somethings
+namespace LightSpeed.Projects
 {
-    public class SomethingRepository : ISomethingRepository
+    public class ProjectRepository : IProjectRepository
     {
         //TODO: Make this inherit from generic repository base class
 
-        public Something FindById(int Id)
+        public Project FindById(int Id)
         {
-            Something Something;
+            Project Something;
 
             using (var context = new LightSpeedDataContext())
             {
-                Something = context.Somethings.Find(Id);
+                Something = context.Projects.Find(Id);
             }
 
             return Something;
         }
 
-        public void Add(Something Something)
+        public void Add(Project project)
         {
             using (var context = new LightSpeedDataContext())
             {
-                context.Somethings.Add(Something);
+                context.Projects.Add(project);
                 context.SaveChanges();
             }
         }
@@ -36,32 +34,32 @@ namespace LightSpeed.Somethings
         {
             using (var context = new LightSpeedDataContext())
             {
-                Something Something = context.Somethings.Find(Id);
+                Project project = context.Projects.Find(Id);
 
-                context.Remove(Something);
+                context.Remove(project);
 
                 context.SaveChanges();
             }
         }
 
-        public void Update(Something Something)
+        public void Update(Project project)
         {
             using (var context = new LightSpeedDataContext())
             {
-                context.Update(Something);
+                context.Update(project);
 
                 context.SaveChanges();
             }
         }
 
-        public Something GetSomethingById(int id)
+        public Project GetProjectById(int id)
         {
             return null;
         }
 
 
 
-        public List<Something> GetAll()
+        public List<Project> GetAll()
         {
             return null;
         }
@@ -71,19 +69,7 @@ namespace LightSpeed.Somethings
             throw new NotImplementedException();
         }
 
-        public Something Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        
-
-        Data.Models.Something ISomethingRepository.Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Data.Models.Something> ISomethingRepository.GetAll()
+        public Project Get(int id)
         {
             throw new NotImplementedException();
         }

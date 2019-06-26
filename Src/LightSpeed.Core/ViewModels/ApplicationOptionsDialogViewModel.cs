@@ -1,5 +1,5 @@
 ﻿using System;
-using LightSpeed.Common.Dialogs;
+
 using LightSpeed.Data;
 using LightSpeed.Data.Models;
 using Prism.Commands;
@@ -50,9 +50,9 @@ namespace LightSpeed.Core.Dialogs
                 //SaveToDatabase();
             }
 
-            var dialogResult = new DialogResult(buttonResult);
+            //var dialogResult = new DialogResult(buttonResult);
 
-            RaiseRequestClose(dialogResult);
+            //RaiseRequestClose(dialogResult);
         }
 
         private void RaiseRequestClose(IDialogResult dialogResult)

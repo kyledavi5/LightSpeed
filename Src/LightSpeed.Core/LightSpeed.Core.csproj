@@ -17,11 +17,7 @@
     <None Remove="Views\NavigationView.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Prism.Wpf" Version="7.2.0.1175-ci" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LightSpeed.Common\LightSpeed.Common.csproj" />
-    <ProjectReference Include="..\Modules\LightSpeed.Somethings\LightSpeed.Somethings.csproj" />
+    <PackageReference Include="Prism.Wpf" Version="7.2.0.1347-pre" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">

@@ -1,6 +1,4 @@
 ﻿using System;
-using LightSpeed.Common.Dialogs;
-using LightSpeed.Common.Services;
 using LightSpeed.Data;
 using LightSpeed.Data.Models;
 using Prism.Commands;
@@ -9,9 +7,9 @@ using Prism.Services.Dialogs;
 
 namespace LightSpeed.Somethings.Dialogs
 {
-    public class CreateSomethingDialogViewModel : BindableBase, IDialogAware
+    public class CreateProjectDialogViewModel : BindableBase, IDialogAware
     {
-        private ISomethingRepository _somethingRepository;
+        //private IProjectRepository _projectRepository;
 
         public event Action<IDialogResult> RequestClose;
 
@@ -31,18 +29,18 @@ namespace LightSpeed.Somethings.Dialogs
             set { SetProperty(ref _title, value); }
         }
 
-        private string _somethingName;
-        public string SomethingName
+        private string _projectName;
+        public string ProjectName
         {
-            get { return _somethingName; }
-            set { SetProperty(ref _somethingName, value); }
+            get { return _projectName; }
+            set { SetProperty(ref _projectName, value); }
         }
 
-        private string _somethingDescription;
-        public string SomethingDescription
+        private string _projectDescription;
+        public string ProjectDescription
         {
-            get { return _somethingDescription; }
-            set { SetProperty(ref _somethingDescription, value); }
+            get { return _projectDescription; }
+            set { SetProperty(ref _projectDescription, value); }
         }
 
         #endregion
@@ -54,9 +52,9 @@ namespace LightSpeed.Somethings.Dialogs
 
         #endregion
 
-        public CreateSomethingDialogViewModel(ISomethingRepository SomethingRepository)
+        public CreateProjectDialogViewModel()//IProjectRepository ProjectRepository)
         {
-            _somethingRepository = SomethingRepository;
+           // _projectRepository = ProjectRepository;
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
@@ -68,11 +66,11 @@ namespace LightSpeed.Somethings.Dialogs
         {
             using (var context = new LightSpeedDataContext())
             {
-                var something = new Something();
+                var project = new Project();
 
-                something.Name = SomethingName;
+                project.Name = ProjectName;
 
-                context.Somethings.Add(something);
+                context.Projects.Add(project);
 
                 context.SaveChanges();
                 
@@ -97,22 +95,20 @@ namespace LightSpeed.Somethings.Dialogs
                 buttonResult = false;
             }
 
-            var dialogResult = new DialogResult(buttonResult);
+            //var dialogResult = new DialogResult(buttonResult);
 
-            RaiseRequestClose(dialogResult);
+            //RaiseRequestClose(dialogResult);
         }
 
         public void RaiseRequestClose(IDialogResult dialogResult)
         {
-            if(dialogResult.Result == true)
-            {
-                // some record action
-            }
+            //if(dialogResult.Result == true)
+            //{
+            //    // some record action
+            //}
 
             RequestClose?.Invoke(dialogResult);
         }
-
-        
 
         public void OnDialogClosed()
         {

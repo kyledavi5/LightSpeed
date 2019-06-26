@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -11,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LightSpeed.Common.Dialogs
+namespace LightSpeed.Projects.Views
 {
     /// <summary>
     /// Interaction logic for NotificationDialog.xaml
     /// </summary>
-    public partial class NotificationDialog : UserControl
+    public partial class CreateProjectDialog : UserControl
     {
-        public NotificationDialog()
+        public CreateProjectDialog()
         {
             InitializeComponent();
         }

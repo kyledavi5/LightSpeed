@@ -18,6 +18,6 @@ namespace LightSpeed.Data
             optionsBuilder.UseSqlite(@"Data Source=appdata.db");
         }
 
-        public DbSet<Something> Somethings { get; set; }
+        public DbSet<Project> Projects { get; set; }
     }
 }

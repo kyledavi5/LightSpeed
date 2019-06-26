@@ -1,17 +1,14 @@
 ﻿using System;
-using LightSpeed.Common.Dialogs;
-using LightSpeed.Common.Services;
-using LightSpeed.Data;
 using LightSpeed.Data.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 
-namespace LightSpeed.Somethings.Dialogs
+namespace LightSpeed.Projects.Views
 {
     public class SomethingDetailsDialogViewModel : BindableBase, IDialogAware
     {
-        private ISomethingRepository _somethingRepository;
+        private IProjectRepository _projectRepository;
 
         public event Action<IDialogResult> RequestClose;
 
@@ -49,9 +46,9 @@ namespace LightSpeed.Somethings.Dialogs
         private DelegateCommand _deleteRecordCommand;
         public DelegateCommand DeleteRecordCommand => _deleteRecordCommand ?? (_deleteRecordCommand = new DelegateCommand(DeleteRecord));
 
-        public SomethingDetailsDialogViewModel(ISomethingRepository SomethingRepository)
+        public SomethingDetailsDialogViewModel(IProjectRepository ProjectRepository)
         {
-            _somethingRepository = SomethingRepository;
+            _projectRepository = ProjectRepository;
         }
 
         public void DeleteRecord()
@@ -77,11 +74,11 @@ namespace LightSpeed.Somethings.Dialogs
 
         private void LoadRecordData()
         {
-            Something Something = new Something();
+            Project project = new Project();
             //Something = _somethingRepository //GetSomethingById(RecordIdentifier);
             
-            SomethingName = Something.Name;
-            SomethingDescription = Something.Description;
+            //ProjectName = Project.Name;
+            //ProjectDescription = Project.Description;
 
         }
 
@@ -110,17 +107,17 @@ namespace LightSpeed.Somethings.Dialogs
                 buttonResult = false;
             }
 
-            var dialogResult = new DialogResult(buttonResult);
+            //var dialogResult = new DialogResult(buttonResult);
 
-            RaiseRequestClose(dialogResult);
+            //RaiseRequestClose(dialogResult);
         }
 
         public void RaiseRequestClose(IDialogResult dialogResult)
         {
-            if(dialogResult.Result == true)
-            {
-                // some record action
-            }
+            //if(dialogResult.Result == true)
+            //{
+            //    // some record action
+            //}
 
             RequestClose?.Invoke(dialogResult);
         }
