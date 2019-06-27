@@ -15,10 +15,10 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Text="Create Something" FontSize="28" Margin="2,5,2,20" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Text="Create Project" FontSize="28" Margin="2,5,2,20" />
         <Label Grid.Row="1" Grid.Column="0" Content="Name:" />
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SomethingName}" />
-        <Button Content="OK" Command="{Binding CloseDialogCommand}" CommandParameter="True" Grid.Row="2" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,130,5"/>
-        <Button Content="Cancel" Command="{Binding CloseDialogCommand}" CommandParameter="False" IsDefault="True" Grid.Row="2" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,10,5" />
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ProjectName}" />
+        <Button Content="OK" Command="{Binding CloseDialogCommand}" CommandParameter="OK" Grid.Row="2" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,130,5"/>
+        <Button Content="Cancel" Command="{Binding CloseDialogCommand}" CommandParameter="Cancel" IsDefault="True" Grid.Row="2" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,10,5" />
     </Grid>
 </UserControl>

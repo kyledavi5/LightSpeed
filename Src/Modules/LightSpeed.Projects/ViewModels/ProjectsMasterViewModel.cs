@@ -56,10 +56,10 @@ namespace LightSpeed.Projects.ViewModels
 
         private void LoadTableData()
         {
-            using (var context = new LightSpeedDataContext())
-            {
-                ProjectCollection = new ObservableCollection<Project>(context.Projects.ToList());
-            }   
+            //using (var context = new LightSpeedDataContext())
+            //{
+            //    ProjectCollection = new ObservableCollection<Project>(context.Projects.ToList());
+            //}   
         }
     }
 }

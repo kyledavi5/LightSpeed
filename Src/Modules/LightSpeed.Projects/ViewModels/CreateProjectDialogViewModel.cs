@@ -5,11 +5,11 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 
-namespace LightSpeed.Somethings.Dialogs
+namespace LightSpeed.Projects.ViewModels
 {
     public class CreateProjectDialogViewModel : BindableBase, IDialogAware
     {
-        //private IProjectRepository _projectRepository;
+        private IProjectRepository _projectRepository;
 
         public event Action<IDialogResult> RequestClose;
 
@@ -52,9 +52,9 @@ namespace LightSpeed.Somethings.Dialogs
 
         #endregion
 
-        public CreateProjectDialogViewModel()//IProjectRepository ProjectRepository)
+        public CreateProjectDialogViewModel(IProjectRepository ProjectRepository)
         {
-           // _projectRepository = ProjectRepository;
+           _projectRepository = ProjectRepository;
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
@@ -84,28 +84,17 @@ namespace LightSpeed.Somethings.Dialogs
 
         protected void CloseDialog(string boolParam)
         {
-            bool buttonResult;
-
-            if (boolParam.ToLower() == "true")
+            DialogResult dialogResult;
+            
+            if (boolParam.ToLower() == "OK")
             {
-                buttonResult = true;
+                dialogResult = new DialogResult(ButtonResult.OK);
             }
             else
             {
-                buttonResult = false;
+                dialogResult = new DialogResult(ButtonResult.Cancel);
+
             }
-
-            //var dialogResult = new DialogResult(buttonResult);
-
-            //RaiseRequestClose(dialogResult);
-        }
-
-        public void RaiseRequestClose(IDialogResult dialogResult)
-        {
-            //if(dialogResult.Result == true)
-            //{
-            //    // some record action
-            //}
 
             RequestClose?.Invoke(dialogResult);
         }

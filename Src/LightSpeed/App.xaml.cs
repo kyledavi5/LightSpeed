@@ -2,7 +2,9 @@
 using LightSpeed.Views;
 using System.Windows;
 using Prism.Modularity;
-
+using LightSpeed.Core;
+using LightSpeed.Data;
+using LightSpeed.Projects;
 
 namespace LightSpeed
 {
@@ -23,10 +25,9 @@ namespace LightSpeed
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<Core.CoreModule>();
-            //moduleCatalog.AddModule<Common.CommonModule>();
-            moduleCatalog.AddModule<Data.DataModule>();
-            //moduleCatalog.AddModule<Somethings.SomethingsModule>();
+            moduleCatalog.AddModule<CoreModule>();
+            moduleCatalog.AddModule<DataModule>();
+            moduleCatalog.AddModule<ProjectModule>();
         }
     }
 }

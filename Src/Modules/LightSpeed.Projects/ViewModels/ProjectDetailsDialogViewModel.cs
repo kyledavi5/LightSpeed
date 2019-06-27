@@ -4,9 +4,9 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 
-namespace LightSpeed.Projects.Views
+namespace LightSpeed.Projects.ViewModels
 {
-    public class SomethingDetailsDialogViewModel : BindableBase, IDialogAware
+    public class ProjectDetailsDialogViewModel : BindableBase, IDialogAware
     {
         private IProjectRepository _projectRepository;
 
@@ -46,7 +46,7 @@ namespace LightSpeed.Projects.Views
         private DelegateCommand _deleteRecordCommand;
         public DelegateCommand DeleteRecordCommand => _deleteRecordCommand ?? (_deleteRecordCommand = new DelegateCommand(DeleteRecord));
 
-        public SomethingDetailsDialogViewModel(IProjectRepository ProjectRepository)
+        public ProjectDetailsDialogViewModel(IProjectRepository ProjectRepository)
         {
             _projectRepository = ProjectRepository;
         }

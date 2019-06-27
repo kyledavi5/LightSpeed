@@ -11,8 +11,6 @@
     <OutputPath></OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Dialogs\ApplicationOptionsDialog.xaml" />
-    <None Remove="Dialogs\ApplicationOptionViewA.xaml" />
     <None Remove="Views\MenuView.xaml" />
     <None Remove="Views\NavigationView.xaml" />
   </ItemGroup>
@@ -25,10 +23,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Dialogs\ApplicationOptionsDialog.xaml.cs">
+    <Compile Update="Views\ApplicationOptionsDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Dialogs\ApplicationOptionViewA.xaml.cs">
+    <Compile Update="Views\ApplicationOptionViewA.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

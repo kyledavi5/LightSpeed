@@ -10,6 +10,8 @@
     <PackageReference Include="Prism.DryIoc" Version="7.2.0.1347-pre" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LightSpeed.Core\LightSpeed.Core.csproj" />
     <ProjectReference Include="..\LightSpeed.Data\LightSpeed.Data.csproj" />
+    <ProjectReference Include="..\Modules\LightSpeed.Projects\LightSpeed.Projects.csproj" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace LightSpeed.Core.Dialogs
+namespace LightSpeed.Core.Views
 {
     /// <summary>
     /// Interaction logic for ApplicationOptionViewA
