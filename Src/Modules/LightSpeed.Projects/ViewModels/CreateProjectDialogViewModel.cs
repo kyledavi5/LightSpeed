@@ -86,9 +86,11 @@ namespace LightSpeed.Projects.ViewModels
         {
             DialogResult dialogResult;
             
-            if (boolParam.ToLower() == "OK")
+            if (boolParam.ToLower() == "ok")
             {
+                SaveRecordData();
                 dialogResult = new DialogResult(ButtonResult.OK);
+                
             }
             else
             {

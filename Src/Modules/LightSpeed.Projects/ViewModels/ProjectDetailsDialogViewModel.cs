@@ -96,28 +96,17 @@ namespace LightSpeed.Projects.ViewModels
 
         protected void CloseDialog(string boolParam)
         {
-            bool buttonResult;
+            DialogResult dialogResult;
 
-            if (boolParam.ToLower() == "true")
+            if (boolParam.ToLower() == "ok")
             {
-                buttonResult = true;
+                dialogResult = new DialogResult(ButtonResult.OK);
             }
             else
             {
-                buttonResult = false;
+                dialogResult = new DialogResult(ButtonResult.Cancel);
+
             }
-
-            //var dialogResult = new DialogResult(buttonResult);
-
-            //RaiseRequestClose(dialogResult);
-        }
-
-        public void RaiseRequestClose(IDialogResult dialogResult)
-        {
-            //if(dialogResult.Result == true)
-            //{
-            //    // some record action
-            //}
 
             RequestClose?.Invoke(dialogResult);
         }

@@ -19,11 +19,11 @@ namespace LightSpeed.Projects.ViewModels
             set { SetProperty(ref _selectedProjectRecord, value); }
         }
 
-        private ObservableCollection<Project> _projectCollection;
-        public ObservableCollection<Project> ProjectCollection
+        private ObservableCollection<Project> _projectsCollection;
+        public ObservableCollection<Project> ProjectsCollection
         {
-            get { return _projectCollection; }
-            set { SetProperty(ref _projectCollection, value); }
+            get { return _projectsCollection; }
+            set { SetProperty(ref _projectsCollection, value); }
         }
 
         private DelegateCommand _openProjectDetailsDialogCommand;
@@ -56,10 +56,10 @@ namespace LightSpeed.Projects.ViewModels
 
         private void LoadTableData()
         {
-            //using (var context = new LightSpeedDataContext())
-            //{
-            //    ProjectCollection = new ObservableCollection<Project>(context.Projects.ToList());
-            //}   
+            using (var context = new LightSpeedDataContext())
+            {
+                ProjectsCollection = new ObservableCollection<Project>(context.Projects.ToList());
+            }
         }
     }
 }
