@@ -13,11 +13,11 @@ namespace LightSpeed.Projects.ViewModels
 
         public event Action<IDialogResult> RequestClose;
 
-        private int _recordIdentifier;
-        public int RecordIdentifier
+        private Project _project;
+        public Project Project
         {
-            get { return _recordIdentifier; }
-            set { SetProperty(ref _recordIdentifier, value); }
+            get { return _project; }
+            set { SetProperty(ref _project, value); }
         }
 
         #region Data Bindings
@@ -29,19 +29,7 @@ namespace LightSpeed.Projects.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        private string _projectName;
-        public string ProjectName
-        {
-            get { return _projectName; }
-            set { SetProperty(ref _projectName, value); }
-        }
-
-        private string _projectDescription;
-        public string ProjectDescription
-        {
-            get { return _projectDescription; }
-            set { SetProperty(ref _projectDescription, value); }
-        }
+        
 
         #endregion
 
@@ -55,6 +43,7 @@ namespace LightSpeed.Projects.ViewModels
         public CreateProjectDialogViewModel(IProjectRepository ProjectRepository)
         {
            _projectRepository = ProjectRepository;
+            Project = new Project();
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
@@ -66,14 +55,10 @@ namespace LightSpeed.Projects.ViewModels
         {
             using (var context = new LightSpeedDataContext())
             {
-                var project = new Project();
 
-                project.Name = ProjectName;
+                context.Projects.Add(Project);
 
-                context.Projects.Add(project);
-
-                context.SaveChanges();
-                
+                context.SaveChanges();   
             }
         }
 
