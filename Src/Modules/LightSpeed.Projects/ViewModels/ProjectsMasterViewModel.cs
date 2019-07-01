@@ -36,7 +36,7 @@ namespace LightSpeed.Projects.ViewModels
 
         private void OpenCreateProjectDialog()
         {
-            _dialogService.ShowDialog("CreateProjectDialog", null, null);
+            _dialogService.ShowDialog("CreateProjectDialog", null, r => { LoadTableData(); });
         }
 
         public void OpenProjectDetailsDialog()
