@@ -41,9 +41,9 @@ namespace LightSpeed.Projects.ViewModels
 
         public void OpenProjectDetailsDialog()
         {
-            var selectedRecordId = SelectedProjectRecord.Id;
+            
 
-            _dialogService.ShowDialog("ProjectDetailsDialog", new DialogParameters($"IdentifierID={selectedRecordId}"), null);
+            _dialogService.ShowDialog("ProjectDetailsDialog", new DialogParameters($"RecordIdentifier={SelectedProjectRecord.Id}"), null);
 
             LoadTableData();
         }
@@ -51,6 +51,7 @@ namespace LightSpeed.Projects.ViewModels
         public ProjectsMasterViewModel(IDialogService dialogService)
         {
             _dialogService = dialogService;
+            SelectedProjectRecord = new Project();
             LoadTableData();
         }
 

@@ -15,7 +15,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Text="Title" FontSize="28" Margin="2,5,2,20" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Text="{Binding Project.Name}" FontSize="28" Margin="2,5,2,20" />
 
         <Button Content="Delete" Command="{Binding CloseDialogCommand}" CommandParameter="True" Grid.Row="2" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,250,5" />
         <Button Content="OK" Command="{Binding CloseDialogCommand}" CommandParameter="True" Grid.Row="2" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,130,5"/>

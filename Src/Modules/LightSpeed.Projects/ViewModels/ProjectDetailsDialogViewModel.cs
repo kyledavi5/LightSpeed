@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using LightSpeed.Data.Models;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -12,11 +13,11 @@ namespace LightSpeed.Projects.ViewModels
 
         public event Action<IDialogResult> RequestClose;
 
-        private int _recordIdentifier;
-        public int RecordIdentifier
+        private Project _project;
+        public Project Project
         {
-            get { return _recordIdentifier; }
-            set { SetProperty(ref _recordIdentifier, value); }
+            get { return _project; }
+            set { SetProperty(ref _project, value); }
         }
 
         private string _title;
@@ -24,20 +25,6 @@ namespace LightSpeed.Projects.ViewModels
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
-        }
-
-        private string _somethingName;
-        public string SomethingName
-        {
-            get { return _somethingName; }
-            set { SetProperty(ref _somethingName, value); }
-        }
-
-        private string _somethingDescription;
-        public string SomethingDescription
-        {
-            get { return _somethingDescription; }
-            set { SetProperty(ref _somethingDescription, value); }
         }
 
         private DelegateCommand<string> _closeDialogCommand;
@@ -49,6 +36,8 @@ namespace LightSpeed.Projects.ViewModels
         public ProjectDetailsDialogViewModel(IProjectRepository ProjectRepository)
         {
             _projectRepository = ProjectRepository;
+            Project = new Project();
+
         }
 
         public void DeleteRecord()
@@ -62,20 +51,28 @@ namespace LightSpeed.Projects.ViewModels
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
-        { 
-            foreach (var parameterKey in parameters.Keys)
+        {
+            if (parameters != null)
             {
-                if(parameterKey == "RecordIdentifier")
+                foreach (string parameterKey in parameters.Keys)
                 {
-                    RecordIdentifier = parameters.GetValue<int>("RecordIdentifier");
-                }
-            }            
+                    if (parameterKey == "RecordIdentifier")
+                    {
+                        LoadRecordData(parameters.GetValue<int>("RecordIdentifier"));
+                    }
+                }         
+            }
+            else
+            {
+                MessageBox.Show("No record identifier found");
+            }
+               
         }
 
-        private void LoadRecordData()
+        private void LoadRecordData(int recordIdentifier)
         {
-            Project project = new Project();
-            //Something = _somethingRepository //GetSomethingById(RecordIdentifier);
+            
+            Project = _projectRepository.FindById(recordIdentifier);
             
             //ProjectName = Project.Name;
             //ProjectDescription = Project.Description;
