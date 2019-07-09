@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
+using LightSpeed.Data;
 using LightSpeed.Data.Models;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -10,6 +13,8 @@ namespace LightSpeed.Projects.ViewModels
     public class ProjectDetailsDialogViewModel : BindableBase, IDialogAware
     {
         private IProjectRepository _projectRepository;
+
+        IDialogService _dialogService;
 
         public event Action<IDialogResult> RequestClose;
 
@@ -27,17 +32,34 @@ namespace LightSpeed.Projects.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
+        private ObservableCollection<ProjectNote> _projectNotes;
+        public ObservableCollection<ProjectNote> ProjectNotes
+        {
+            get { return _projectNotes; }
+            set { SetProperty(ref _projectNotes, value); }
+        }
+
         private DelegateCommand<string> _closeDialogCommand;
         public DelegateCommand<string> CloseDialogCommand => _closeDialogCommand ?? (_closeDialogCommand = new DelegateCommand<string>(CloseDialog));
+
+        private DelegateCommand _addProjectNoteCommand;
+        public DelegateCommand AddProjectNoteCommand => _addProjectNoteCommand ?? (_addProjectNoteCommand = new DelegateCommand(ExecuteAddProjectNoteCommand));
 
         private DelegateCommand _deleteRecordCommand;
         public DelegateCommand DeleteRecordCommand => _deleteRecordCommand ?? (_deleteRecordCommand = new DelegateCommand(DeleteRecord));
 
-        public ProjectDetailsDialogViewModel(IProjectRepository ProjectRepository)
+        public ProjectDetailsDialogViewModel(IProjectRepository ProjectRepository, IDialogService dialogService)
         {
             _projectRepository = ProjectRepository;
+            _dialogService = dialogService;
             Project = new Project();
+        }
 
+        private void ExecuteAddProjectNoteCommand()
+        {
+            _dialogService.ShowDialog("CreateProjectNoteDialog", new DialogParameters($"RecordIdentifier={Project.Id}"), null);
+
+            
         }
 
         public void DeleteRecord()
@@ -66,17 +88,18 @@ namespace LightSpeed.Projects.ViewModels
             {
                 MessageBox.Show("No record identifier found");
             }
-               
         }
 
         private void LoadRecordData(int recordIdentifier)
         {
-            
             Project = _projectRepository.FindById(recordIdentifier);
+            using (var context = new LightSpeedDataContext())
+            {
+                ProjectNotes = new ObservableCollection<ProjectNote>(context.ProjectNotes.ToList());
+            }
             
             //ProjectName = Project.Name;
             //ProjectDescription = Project.Description;
-
         }
 
         private void SaveRecordData()

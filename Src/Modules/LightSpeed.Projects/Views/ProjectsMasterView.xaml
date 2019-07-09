@@ -6,9 +6,15 @@
     <StackPanel>
         <TextBlock Text="Projects Master" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,10" />
         <Button Content="New" Command="{Binding OpenCreateProjectDialogCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Height="25" Margin="0,10,45,10" />
-        <DataGrid AutoGenerateColumns="True" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" 
+        <DataGrid AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" 
                   ItemsSource="{Binding ProjectsCollection}" SelectedItem="{Binding SelectedProjectRecord, Mode=TwoWay}" 
                   Width="800" Height="400" Margin="0,5,0,0"  HorizontalAlignment="Center" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+
+
+            </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick"
                               Command="{Binding OpenProjectDetailsDialogCommand}" CommandParameter="" />

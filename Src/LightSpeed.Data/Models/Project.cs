@@ -13,5 +13,8 @@ namespace LightSpeed.Data.Models
 
         public string Description { get; set; }
 
+        public List<ProjectNote> ProjectNotes { get; set; }
+
+
     }
 }

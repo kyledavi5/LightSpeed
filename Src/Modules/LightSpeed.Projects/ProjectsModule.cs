@@ -19,6 +19,7 @@ namespace LightSpeed.Projects
         {
             containerRegistry.RegisterForNavigation<ProjectsMasterView>();
             containerRegistry.RegisterDialog<CreateProjectDialog, CreateProjectDialogViewModel>();
+            containerRegistry.RegisterDialog<CreateProjectNoteDialog, CreateProjectNoteDialogViewModel>();
             containerRegistry.RegisterDialog<ProjectDetailsDialog, ProjectDetailsDialogViewModel>();
             containerRegistry.RegisterSingleton<IProjectRepository, ProjectRepository>();
         }

@@ -19,5 +19,7 @@ namespace LightSpeed.Data
         }
 
         public DbSet<Project> Projects { get; set; }
+
+        public DbSet<ProjectNote> ProjectNotes { get; set; }
     }
 }

@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Views\CreateProjectDialog.xaml" />
+    <None Remove="Views\CreateProjectNoteDialog.xaml" />
     <None Remove="Views\ProjectDetailsDialog.xaml" />
     <None Remove="Views\ProjectsMasterView.xaml" />
   </ItemGroup>
@@ -16,6 +17,9 @@
     <ProjectReference Include="..\..\LightSpeed.Data\LightSpeed.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\CreateProjectNoteDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CreateProjectDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
