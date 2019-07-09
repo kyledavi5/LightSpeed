@@ -43,7 +43,7 @@ namespace LightSpeed.Projects.ViewModels
         {
             
 
-            _dialogService.ShowDialog("ProjectDetailsDialog", new DialogParameters($"RecordIdentifier={SelectedProjectRecord.Id}"), null);
+            _dialogService.ShowDialog("ProjectDetailsDialog", new DialogParameters($"RecordIdentifier={SelectedProjectRecord.Id}"), r => { LoadTableData(); });
 
             LoadTableData();
         }

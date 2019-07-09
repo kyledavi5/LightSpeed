@@ -25,6 +25,29 @@ namespace LightSpeed.Projects.ViewModels
             set { SetProperty(ref _project, value); }
         }
 
+        private ProjectNote _selectedNote;
+        public ProjectNote SelectedNote
+        {
+            get { return _selectedNote; }
+            set { SetProperty(ref _selectedNote, value); }
+        }
+
+        private DelegateCommand _deleteNoteCommand;
+        public DelegateCommand DeleteNoteCommand =>
+            _deleteNoteCommand ?? (_deleteNoteCommand = new DelegateCommand(ExecuteDeleteNoteCommand));
+
+        void ExecuteDeleteNoteCommand()
+        {
+            using (var context = new LightSpeedDataContext())
+            {
+                var note = context.ProjectNotes.Find(SelectedNote.Id);
+                context.ProjectNotes.Remove(note);
+                context.SaveChanges();
+                LoadRecordData(Project.Id);
+            }
+        }
+
+
         private string _title;
         public string Title
         {
@@ -53,11 +76,12 @@ namespace LightSpeed.Projects.ViewModels
             _projectRepository = ProjectRepository;
             _dialogService = dialogService;
             Project = new Project();
+            SelectedNote = new ProjectNote();
         }
 
         private void ExecuteAddProjectNoteCommand()
         {
-            _dialogService.ShowDialog("CreateProjectNoteDialog", new DialogParameters($"RecordIdentifier={Project.Id}"), null);
+            _dialogService.ShowDialog("CreateProjectNoteDialog", new DialogParameters($"RecordIdentifier={Project.Id}"), r => { LoadRecordData(Project.Id); });
 
             
         }
@@ -65,11 +89,12 @@ namespace LightSpeed.Projects.ViewModels
         public void DeleteRecord()
         {
             //TODO: Display a confirmation dialog that prompts the user for record deletion confirmation
-
-            //TODO: write delete record confirmation logic
-                // get the results of the confirmation from the command parameter (true/false)
-                // assign a bool value to a result variable
-                // evaluate the result variable and if true call the delete record command   
+            using (var context = new LightSpeedDataContext())
+            {
+                context.Projects.Remove(Project);
+                context.SaveChanges();
+            }
+            CloseDialog("false");
         }
 
         public void OnDialogOpened(IDialogParameters parameters)

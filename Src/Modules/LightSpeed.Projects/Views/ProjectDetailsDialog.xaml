@@ -26,31 +26,44 @@
         <TabControl HorizontalAlignment="Left" Height="150" Margin="10,25,0,0" Grid.Row="5" VerticalAlignment="Center" Width="479" Grid.ColumnSpan="2">
             <TabItem Header="Notes">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ProjectNotes}" IsReadOnly="True">
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ProjectNotes}" IsSynchronizedWithCurrentItem="True" IsReadOnly="True"
+                              SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Date" Binding="{Binding CreatedDate}" />
                             <DataGridTextColumn Header="Summary" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="Details" Binding="{Binding Content}" />
-
-
+                            <DataGridTextColumn Header="Details" Binding="{Binding Content}" />
                         </DataGrid.Columns>
                         <DataGrid.InputBindings>
                             <MouseBinding Gesture="LeftDoubleClick"
                               Command="{Binding OpenProjectDetailsDialogCommand}" CommandParameter="" />
                         </DataGrid.InputBindings>
-
-
-
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Delete" Command="{Binding DeleteNoteCommand}" />
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
                     </DataGrid>
                 </Grid>
-
             </TabItem>
-            
+            <TabItem Header="Tasks">
+                
+            </TabItem>
+            <TabItem Header="Milestones">
+                
+            </TabItem>
+            <TabItem Header="Comments">
+                
+            </TabItem>
+            <TabItem Header="Files">
+                
+            </TabItem>
+            <TabItem Header="People">
+                
+            </TabItem>
         </TabControl>
-        <Button Content="Delete" Command="{Binding CloseDialogCommand}" CommandParameter="True" Grid.Row="6" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,250,5" />
+        <Button Content="Delete" Command="{Binding DeleteRecordCommand}" CommandParameter="True" Grid.Row="6" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,250,5" />
         <Button Content="Add Note" Command="{Binding AddProjectNoteCommand}" Grid.Row="6" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="0,54.857,374,5.143" />
         <Button Content="OK" Command="{Binding CloseDialogCommand}" CommandParameter="True" Grid.Row="6" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,130,5"/>
         <Button Content="Cancel" Command="{Binding CloseDialogCommand}" CommandParameter="False" IsDefault="True" Grid.Row="6" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,10,5" />
-
     </Grid>
 </UserControl>
