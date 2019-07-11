@@ -3,31 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             Width="800" Height="464">
+             Height="516.009" Width="682.176">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="76*"/>
+            <RowDefinition Height="37*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="233*"/>
+            <RowDefinition Height="37*"/>
+            <RowDefinition Height="34*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition />
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="82*"/>
+            <ColumnDefinition Width="81*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="93*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="109*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="26*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Margin="10,0,0,0" Text="Project Details" FontSize="28" />
-        <Label Grid.Row="1" Grid.Column="0" Content="Name:" Margin="10,25,0,0"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Margin="10,0,0,0" Text="{Binding Project.Name}" FontSize="18" />
-        <Label Grid.Row="3" Grid.Column="0" Content="Description:" Margin="10,0,0,0"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Margin="10,0,0,0" Text="{Binding Project.Description}" FontSize="18"  />
-        <TabControl HorizontalAlignment="Left" Height="150" Margin="10,25,0,0" Grid.Row="5" VerticalAlignment="Center" Width="479" Grid.ColumnSpan="2">
-            <TabItem Header="Notes">
+        <Label Content="Name:" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="50" Grid.Column="1" Margin="8.996,0.237,0,0"/>
+        <Label Content="Description:" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Height="26" Width="74" Grid.Column="1" Margin="8.996,2.998,0,0" Grid.ColumnSpan="2"/>
+        <Label Content="Status:" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="52" Margin="1.943,0.237,0,0"/>
+        <Label Content="Completed %:" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Height="26" Width="81" Margin="1.943,2.998,0,0"/>
+        <TextBlock HorizontalAlignment="Left" Margin="13.996,10,0,0" TextWrapping="Wrap" Text="Project Details" VerticalAlignment="Top" Height="38" Width="444" Grid.ColumnSpan="7" FontSize="24" Grid.Column="1"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="69.996,8.237,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Project.Name}" VerticalAlignment="Top" Height="16" Width="80" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0,6.998,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Project.Description}" VerticalAlignment="Top" Height="22" Width="78"/>
+        <TextBlock Grid.Column="5" HorizontalAlignment="Center" Margin="0,5.237,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Field 3 Data" VerticalAlignment="Top" Height="19" Width="64"/>
+        <TextBlock Grid.Column="5" HorizontalAlignment="Center" Margin="0,6.998,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Field 4 Data" VerticalAlignment="Top" Height="16" Width="64"/>
+        <Button Content="Cancel" Command="{Binding CloseDialogCommand}" CommandParameter="False" Grid.Column="7" HorizontalAlignment="Left" Margin="9.892,10.046,0,0" Grid.Row="4" VerticalAlignment="Top" Width="76" Height="20"/>
+        <Button Content="Ok" Command="{Binding CloseDialogCommand}" CommandParameter="True" Grid.Column="8" HorizontalAlignment="Left" Margin="14.863,10.046,0,0" Grid.Row="4" VerticalAlignment="Top" Width="74" Height="20"/>
+        <TabControl Grid.ColumnSpan="8" Grid.Column="1" HorizontalAlignment="Left" Height="203" Margin="10.996,41.041,0,0" Grid.Row="3" VerticalAlignment="Top" Width="596">
+            <TabItem Header="Notes" >
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ProjectNotes}" IsSynchronizedWithCurrentItem="True" IsReadOnly="True"
-                              SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Content="Add Note" Command="{Binding AddProjectNoteCommand}" Height="25" Width="100" HorizontalAlignment="Left" Margin="480,5,5,10" />
+
+                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding ProjectNotes}" IsSynchronizedWithCurrentItem="True" IsReadOnly="True"
+                              SelectedItem="{Binding SelectedNote, Mode=TwoWay}" HorizontalAlignment="Center" Width="570" Margin="0,0,0,5.04">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Date" Binding="{Binding CreatedDate}" />
                             <DataGridTextColumn Header="Summary" Binding="{Binding Name}" />
@@ -45,25 +65,25 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
             <TabItem Header="Tasks">
-                
+
             </TabItem>
             <TabItem Header="Milestones">
-                
+
             </TabItem>
             <TabItem Header="Comments">
-                
+
             </TabItem>
             <TabItem Header="Files">
-                
+
             </TabItem>
             <TabItem Header="People">
-                
+
             </TabItem>
         </TabControl>
-        <Button Content="Delete" Command="{Binding DeleteRecordCommand}" CommandParameter="True" Grid.Row="6" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,250,5" />
-        <Button Content="Add Note" Command="{Binding AddProjectNoteCommand}" Grid.Row="6" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="0,54.857,374,5.143" />
-        <Button Content="OK" Command="{Binding CloseDialogCommand}" CommandParameter="True" Grid.Row="6" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,130,5"/>
-        <Button Content="Cancel" Command="{Binding CloseDialogCommand}" CommandParameter="False" IsDefault="True" Grid.Row="6" Grid.Column="1" Height="25" Width="100" HorizontalAlignment="Right" Margin="5,55,10,5" />
+        <Button Content="Delete" Command="{Binding DeleteRecordCommand}" CommandParameter="True" Grid.Row="4" Width="72" HorizontalAlignment="Center" Margin="0,12.046,0,11.194" Grid.Column="5" />
     </Grid>
 </UserControl>

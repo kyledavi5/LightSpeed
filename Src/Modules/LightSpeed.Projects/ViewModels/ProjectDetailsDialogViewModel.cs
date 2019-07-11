@@ -33,8 +33,7 @@ namespace LightSpeed.Projects.ViewModels
         }
 
         private DelegateCommand _deleteNoteCommand;
-        public DelegateCommand DeleteNoteCommand =>
-            _deleteNoteCommand ?? (_deleteNoteCommand = new DelegateCommand(ExecuteDeleteNoteCommand));
+        public DelegateCommand DeleteNoteCommand => _deleteNoteCommand ?? (_deleteNoteCommand = new DelegateCommand(ExecuteDeleteNoteCommand));
 
         void ExecuteDeleteNoteCommand()
         {
@@ -46,7 +45,6 @@ namespace LightSpeed.Projects.ViewModels
                 LoadRecordData(Project.Id);
             }
         }
-
 
         private string _title;
         public string Title
@@ -120,7 +118,7 @@ namespace LightSpeed.Projects.ViewModels
             Project = _projectRepository.FindById(recordIdentifier);
             using (var context = new LightSpeedDataContext())
             {
-                ProjectNotes = new ObservableCollection<ProjectNote>(context.ProjectNotes.ToList());
+                ProjectNotes = new ObservableCollection<ProjectNote>(context.ProjectNotes.Where(p => p.ProjectId == Project.Id).ToList());
             }
             
             //ProjectName = Project.Name;
