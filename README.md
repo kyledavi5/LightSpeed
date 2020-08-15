@@ -9,4 +9,4 @@ LightSpeed Incorporates:
 * Entity Framework Core based data persistence
 * Support for data persistence framework interoperability through repository pattern implementation
 
-A big thank you to Brain Lagunas and the Prism community for helping me learn prism. 
+
